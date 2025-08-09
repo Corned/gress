@@ -9,23 +9,77 @@ import {
 
 import { heroData, IHeroDataEntry } from "../lib/heroData"
 
+const compositions = [
+  {
+    name: "Monkey Dive",
+    tank: ["Winston"],
+    damage: ["Tracer", "Genji"],
+    support: ["Ana", "Brigitte"],
+  },
+  {
+    name: "Monkey Rush",
+    tank: ["Winston"],
+    damage: ["Sojourn", "Genji"],
+    support: ["Juno", "Kiriko"],
+  },
+  {
+    name: "Classic Poke",
+    tank: ["Sigma"],
+    damage: ["Hanzo", "Widowmaker"],
+    support: ["Baptiste", "Zenyatta"],
+  },
+  {
+    name: "Untouchables",
+    tank: ["WreckingBall"],
+    damage: ["Tracer", "Echo"],
+    support: ["Mercy", "Lucio"],
+  }
+]
 
+export interface IComposition {
+  name: string;
+  tank: string[];
+  damage: string[];
+  support: string[];
+}
 
-
-
-export interface HeroSelected {
-  hero: keyof typeof heroData;
+export interface CompositionSelected {
+  hero: keyof typeof compositions;
 }
 
 
 interface HeroPickerProps {
-  selected: IHeroDataEntry | null;
-  setSelected: (hero: IHeroDataEntry) => void;
-  roleFilter?: string;
+  selected: IComposition | null;
+  setSelected: (hero: IComposition) => void;
 }
 
+const Thumbnail = ({ src, alt, className }: { src: string; alt: string; className?: string }) => {
+  return (
+    <div className={`rounded-full bg-white border-2 border-gray-200 overflow-hidden  ${className}`}>
+      <img src={src} alt={alt} className="h-full" />
+    </div>
+  )
+}
 
-const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilter }) => {
+const Composition = ({ name, heroes }: { name: string; heroes: IHeroDataEntry[] }) => {
+  return (
+    <div className="flex flex-col items-center">
+      <h3 className="text-lg font-semibold">{name}</h3>
+      <div className="flex flex-row items-start justify-start gap-[-5px] py-2">
+        {heroes.map((hero, index) => (
+          <Thumbnail
+            key={hero.name}
+            src={hero.thumbnail}
+            alt={hero.displayName}
+            className={`h-16 w-16 z-[${heroes.length - index}]  ${index === 0 ? "ml-0" : "ml-[-20px]"}`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const CompositionPicker: React.FC<HeroPickerProps> = ({ selected, setSelected }) => {
 
   const [filter, setFilter] = useState<string>("");
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -34,8 +88,8 @@ const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilt
   const filterRef = useRef<HTMLInputElement | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const handleSelection = (herodataEntry: IHeroDataEntry) => {
-    setSelected(herodataEntry);
+  const handleSelection = (composition: IComposition) => {
+    setSelected(composition);
     setOpen(false);
   };
 
@@ -88,20 +142,6 @@ const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilt
     setFilter(event.target.value);
   };
 
-  const filteredHeroes = Object.values(heroData)
-    .filter((hero: IHeroDataEntry) => {
-      return hero.role === roleFilter || !roleFilter;
-    })
-    .filter((hero: IHeroDataEntry) => {
-      return hero.name.toLowerCase().includes(filter.toLowerCase())
-      || hero.displayName.toLowerCase().includes(filter.toLowerCase());
-    })
-    .sort((a: IHeroDataEntry, b: IHeroDataEntry) => {
-      if (a.displayName < b.displayName) return -1;
-      if (a.displayName > b.displayName) return 1;
-      return 0;
-    });
-
   return (
     <div
       ref={pickerRef}
@@ -116,15 +156,15 @@ const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilt
           selected && (selected.name in heroData)
           ? <img
               src={heroData[selected.name as keyof typeof heroData].thumbnail}
-              alt={selected.displayName}
+              alt={selected.name}
               className="inline aspect-square h-full rounded-full bg-gray-300"
             />
           : <RiShapesLine/>
         }
         {
           selected?.name
-          ? <span className="text-lg">{selected.displayName}</span>
-          : <span>Select a Hero</span>
+          ? <span className="text-lg">{selected.name}</span>
+          : <span>Select a Composition</span>
         }
         <RiArrowDropDownLine className="ml-auto" />
       </button>
@@ -138,7 +178,7 @@ const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilt
             <input
               value={filter}
               onChange={handleFilter}
-              placeholder="e.g. Tracer"
+              placeholder="e.g. Pulled Pork"
               ref={filterRef}
               className="pl-2 bg-[#ece8e8] rounded-lg border-none py-2 block w-full"
             />
@@ -146,33 +186,22 @@ const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilt
 
           <div className="h-px w-full bg-black/10" />
 
-          <div
-            className={
-              cn(
-                "max-h-[400px] overflow-y-auto p-2.5",
-                "grid gap-2 grid-cols-[repeat(auto-fill,minmax(70px,1fr))] [&>*]:aspect-square"
-              )
+          <div className="max-h-[400px] overflow-y-auto p-2.5">
+            {
+              compositions.map((composition) => {
+                const heroes = [ ...composition.tank, ...composition.damage, ...composition.support ].map((heroName) => heroData[heroName as keyof typeof heroData]);
+                return (
+                  <button
+                    className="flex flex-col gap-4 w-full rounded-md bg-white hover:bg-gray-200 transition-colors justify-center"
+                    onClick={() => handleSelection(composition)}
+                    key={composition.name}
+                    tabIndex={0}
+                  >
+                    <Composition name={composition.name} heroes={heroes} />
+                  </button>
+                )
+              })
             }
-          >
-            {filteredHeroes.map((hero) => (
-              <button
-                className={
-                  cn(
-                    "flex items-center w-full rounded-md bg-white hover:bg-gray-200 transition-colors",
-                    "flex-col justify-center gap-4 rounded-full"
-                  )
-                }
-                onClick={() => handleSelection(hero)}
-                key={hero.name}
-                tabIndex={0}
-              >
-                <img
-                  src={hero.thumbnail}
-                  alt={hero.displayName}
-                  className="inline rounded-full border-2"
-                />
-              </button>
-            ))}
           </div>
         </div>
       )}
@@ -181,4 +210,4 @@ const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilt
 }
 
 
-export default HeroPicker
+export default CompositionPicker
