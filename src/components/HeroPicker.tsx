@@ -105,10 +105,10 @@ const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilt
   return (
     <div
       ref={pickerRef}
-      className="relative w-full bg-white  h-14 "
+      className="relative w-full h-14"
     >
       <button
-        className="w-full h-full flex gap-4 items-center py-2 px-4 bg-gray-50 rounded-lg border border-gray-300 focus:outline-none"
+        className="w-full h-full flex gap-4 items-center py-2 px-4 bg-white rounded-lg border border-gray-300 focus:outline-none"
         onClick={setOpenState(true)}
         tabIndex={0}
       >
@@ -132,7 +132,7 @@ const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilt
       {isOpen && (
         <div
           ref={dropdownRef}
-          className="z-10 w-full bg-white grid grid-rows-[auto_1fr] rounded-lg border border-gray-300 overflow-hidden absolute top-0 shadow-[0_3px_12px_rgba(0,0,0,0.09)]"
+          className="z-10 w-full bg-white grid grid-rows-[auto_1fr] rounded-lg border border-gray-300 overflow-hidden absolute top-0"
         >
           <div className="p-2">
             <input
@@ -146,20 +146,13 @@ const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilt
 
           <div className="h-px w-full bg-black/10" />
 
-          <div
-            className={
-              cn(
-                "max-h-[400px] overflow-y-auto p-2.5",
-                "grid gap-2 grid-cols-[repeat(auto-fill,minmax(70px,1fr))] [&>*]:aspect-square"
-              )
-            }
-          >
+          <div className="p-2 grid gap-2 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] [&>*]:aspect-square">
             {filteredHeroes.map((hero) => (
               <button
                 className={
                   cn(
-                    "flex items-center w-full rounded-md bg-white hover:bg-gray-200 transition-colors",
-                    "flex-col justify-center gap-4 rounded-full"
+                    "flex bg-gray-200 hover:bg-gray-300 shadow-[0px_2px_9px_2px_rgba(0,_0,_0,_0.05)]",
+                    "flex-col gap-4 rounded-full overflow-hidden border-1 border-gray-300 hover:scale-105 transition-transform"
                   )
                 }
                 onClick={() => handleSelection(hero)}
@@ -169,7 +162,6 @@ const HeroPicker: React.FC<HeroPickerProps> = ({ selected, setSelected, roleFilt
                 <img
                   src={hero.thumbnail}
                   alt={hero.displayName}
-                  className="inline rounded-full border-2"
                 />
               </button>
             ))}
