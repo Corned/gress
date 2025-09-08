@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { mapData, IMapData } from "@/lib/mapData";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 const Page = () => {
   const [selectedMode, setSelectedMode] = useState<string>("Control");
@@ -13,15 +14,13 @@ const Page = () => {
 
   return (
     <div className="mx-auto max-w-[1000px] flex flex-col gap-10 items-center">
-      <div className="flex flex-col gap-4 w-full">
+      <div className="flex flex-col gap-2 w-full">
         <div className="flex flex-row flex-wrap gap-2 w-full">
-          <button onClick={() => setSelectedMode("Control")}>Control</button>
-          <button onClick={() => setSelectedMode("Escort")}>Escort</button>
-          <button onClick={() => setSelectedMode("Hybrid")}>Hybrid</button>
-          <button onClick={() => setSelectedMode("Push")}>Push</button>
-          <button onClick={() => setSelectedMode("Flashpoint")}>
-            Flashpoint
-          </button>
+          <Button onClick={() => setSelectedMode("Control")}>Control</Button>
+          <Button onClick={() => setSelectedMode("Escort")}>Escort</Button>
+          <Button onClick={() => setSelectedMode("Hybrid")}>Hybrid</Button>
+          <Button onClick={() => setSelectedMode("Push")}>Push</Button>
+          <Button onClick={() => setSelectedMode("Flashpoint")}>Flashpoint</Button>
         </div>
         <div className="flex flex-col">
           <div className="grid grid-cols-[repeat(3,1fr)] gap-2">
@@ -37,11 +36,7 @@ const Page = () => {
                   key={map.name}
                 >
                   <img
-                    src={
-                      typeof map.thumbnail === "string"
-                        ? map.thumbnail
-                        : map.thumbnail.src
-                    }
+                    src={map.thumbnail}
                     alt={map.displayName}
                     className="transition-all object-cover aspect-video"
                   />
