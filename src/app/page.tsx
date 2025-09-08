@@ -7,7 +7,9 @@ import { motion, AnimatePresence } from "framer-motion";
 const Page = () => {
   const [selectedMode, setSelectedMode] = useState<string>("Control");
   const maps = Object.values(mapData);
-  const filteredMaps = maps.filter((map) => map.type === selectedMode);
+  const filteredMaps = maps
+    .filter((map) => map.type === selectedMode)
+    .sort((a: IMapData, b: IMapData) => a.displayName.localeCompare(b.displayName));
 
   return (
     <div className="mx-auto max-w-[1000px] flex flex-col gap-10 items-center">
