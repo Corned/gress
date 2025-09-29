@@ -3,7 +3,7 @@ import React from "react";
 const CoolButton = ({ label, background }: { label: string; background: string }) => {
   return (
     <button
-      className="relative rounded-lg overflow-hidden cursor-pointer p-3 flex-1 drop-shadow-[0_1.2px_2px_rgba(50,50,50,0.4)]"
+      className="relative rounded-lg overflow-hidden cursor-pointer p-3"
     >
       <img
         src={`/assets/images/maps/${background}.webp`}
@@ -20,7 +20,7 @@ const CoolButton = ({ label, background }: { label: string; background: string }
 
 const Page = () => {
   return (
-    <div className="flex flex-col gap-10 mt-20">
+    <div className="flex flex-col gap-10">
       <h1 className="text-7xl font-bold">gress</h1>
       <p className="text-lg text-gray-600">
         Built to track Overwatch rankings and scrimmage results.
@@ -30,7 +30,7 @@ const Page = () => {
         <CoolButton label="5v5" background="kings_row" />
         <CoolButton label="Stadium" background="redwood_dam" />
         <CoolButton label="Scrims" background="lijiang_tower" />
-        <CoolButton label="6v6" background="nepal" />
+        <CoolButton label="6v6" background="hanamura" />
 
       </div>
     </div>

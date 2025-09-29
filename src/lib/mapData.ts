@@ -12,6 +12,7 @@ export const mapTypeIcons = {
   Escort: "/assets/images/maps/Escort.webp",
   Hybrid: "/assets/images/maps/Hybrid.webp",
   Push: "/assets/images/maps/Push.webp",
+  Flashpoint: "/assets/images/maps/Flashpoint.webp",
 };
 
 export const mapData = {
