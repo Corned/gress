@@ -11,6 +11,12 @@
   font-family: "Inter";
 }
 
+.transparent {
+  background-image: conic-gradient(#8F8F8F 90deg, transparent 90deg 180deg, #8F8F8F 180deg 270deg, transparent 270deg);
+  background-size: 26px 26px;
+  background-color: #BFBFBF;
+}
+
 @font-face {
   font-family: "Inter";
   src: url(/assets/fonts/Inter.ttf) format("truetype");

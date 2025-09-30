@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dialog"
 
 import { Button } from "@/components/ui/button";
-import { data } from "framer-motion/client";
+import { data, filter } from "framer-motion/client";
 
 const Entry = ({ map, heroBans, results, code, winningTeam }: { map: IMapData; heroBans: IHeroData[]; results: number[]; code: string; winningTeam: number; }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -151,7 +151,9 @@ const Page = () => {
     if (ref.current === null) return;
 
     try {
-      const dataUrl = await htmlToImage.toPng(ref.current);
+      ref.current.classList.remove("transparent")
+      const dataUrl = await htmlToImage.toPng(ref.current)
+      //
       console.log(dataUrl);
       const link = document.createElement("a");
       link.download = "export.png";
@@ -160,27 +162,16 @@ const Page = () => {
     } catch (error) {
       console.error("Export failed:", error);
     }
+
+    ref.current.classList.add("transparent")
   };
 
   return (
     <div className="">
 
-      <Dialog>
-        <DialogTrigger>Open</DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-            </DialogDescription>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
-
       <div
         ref={ref}
-        className="flex flex-col gap-2 max-w-[650px] rounded-lg">
+        className="flex flex-col gap-2 max-w-[650px] rounded-lg transparent p-2">
 
         <div className="flex flex-row justify-between items-center">
           <div className="flex flex-col gap-0">
@@ -206,7 +197,7 @@ const Page = () => {
         }
 
 
-        <p className="w-full text-center text-white font-bold">gress.tmp.ooo</p>
+        <p className="w-full text-center text-white font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]">gress.tmp.ooo</p>
       </div>
 
       <button
