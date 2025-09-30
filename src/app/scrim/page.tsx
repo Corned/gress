@@ -5,61 +5,86 @@ import * as htmlToImage from "html-to-image";
 
 import { mapTypeIcons, mapData, IMapData } from "@/lib/mapData";
 import { heroData, IHeroData } from "@/lib/heroData";
-import test from "node:test";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+import { Button } from "@/components/ui/button";
+import { data } from "framer-motion/client";
 
 const Entry = ({ map, heroBans, results, code, winningTeam }: { map: IMapData; heroBans: IHeroData[]; results: number[]; code: string; winningTeam: number; }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOpen = () => setIsOpen(!isOpen);
+  const handleOpen = () => setIsOpen(true);
+  const handleClose = () => setIsOpen(false);
+
+  const containerClasses = isOpen ? "h-auto" : "h-16";
+  const contentClasses = isOpen ? "rounded-t-lg" : "rounded-lg";
 
   return (
-    <div className="rounded-lg overflow-hidden relative h-16 flex flex-row gap-3 items-center p-4 z-20">
-      <div className="bg-gradient-to-r from-black/60 via-black/20 to-transparent absolute inset-0 z-10 "></div>
-      <img src={map.thumbnail} alt="Map Type Icon" className="absolute object-cover w-full z-0 left-0 scale-105 blur-[1px]" />
-      <img src={mapTypeIcons[map.type]} alt="Map Type Icon" className="z-20 h-full drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]" />
-      <p className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)] font-bold text-xl uppercase text-center text-white z-20 ">
-        {map.displayName}
-      </p>
+    <div className={`${containerClasses} overflow-hidden`}>
+      <div className={`${contentClasses} overflow-hidden relative flex flex-row gap-3 items-center h-16 p-4 z-20 select-none cursor-pointer`} onClick={toggleOpen}>
+        <div className="bg-gradient-to-r from-black/60 via-black/20 to-transparent absolute inset-0 z-10 h-16 "></div>
+        <img src={map.thumbnail} alt="Map Type Icon" className="absolute object-cover w-full z-0 left-0 scale-105 blur-[1px]" />
+        <img src={mapTypeIcons[map.type]} alt="Map Type Icon" className="z-20 h-full drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]" />
+        <p className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)] font-bold text-xl uppercase text-center text-white z-20 ">
+          {map.displayName}
+        </p>
 
-      <div className="flex-grow"></div>
+        <div className="flex-grow"></div>
 
-      {/* HERO BANS */}
-      <div className="flex flex-row gap-2 z-20">
+        {/* HERO BANS */}
+        <div className="flex flex-row gap-2 z-20">
+          {
+            heroBans.map((hero) => (
+              <img key={hero.name} src={hero.thumbnail} alt={hero.name} className="h-12 z-20 relative rounded-lg border-2 border-red-500 saturate-40" />
+            ))
+          }
+        </div>
+
         {
-          heroBans.map((hero) => (
-            <img key={hero.name} src={hero.thumbnail} alt={hero.name} className="h-12 z-20 relative rounded-full border-2 border-red-500 bg-gray-700 saturate-40" />
-          ))
+          // Your team wins
+          winningTeam === 0 && (
+            <p className="uppercase bg-green-600 z-20 relative text-white font-bold font-mono! p-2 text rounded">
+              {results.join("-")}
+            </p>
+          )
         }
+
+        {
+          // Enemy team wins
+          winningTeam === 1 && (
+            <p className="uppercase bg-red-500 z-20 relative text-white font-bold font-mono! p-2 text rounded">
+              {results.join("-")}
+            </p>
+          )
+        }
+        {
+          // Draw
+          winningTeam === 2 && (
+            <p className="uppercase bg-gray-500 z-20 relative text-white font-bold font-mono! p-2 text rounded">
+              {results.join("-")}
+            </p>
+          )
+        }
+
+
+
+        <p className="uppercase bg-orange-500 z-20 relative text-white font-bold font-mono! p-2 text rounded">
+          {code}
+        </p>
       </div>
 
-      {
-        // Your team wins
-        winningTeam === 0 && (
-          <p className="uppercase bg-green-600 z-20 relative text-white font-bold font-mono! p-2 text rounded">
-            {results.join("-")}
-          </p>
-        )
-      }
-
-      {
-        // Enemy team wins
-        winningTeam === 1 && (
-          <p className="uppercase bg-red-500 z-20 relative text-white font-bold font-mono! p-2 text rounded">
-            {results.join("-")}
-          </p>
-        )
-      }
-      {
-        // Draw
-        winningTeam === 2 && (
-          <p className="uppercase bg-gray-500 z-20 relative text-white font-bold font-mono! p-2 text rounded">
-            {results.join("-")}
-          </p>
-        )
-      }
-
-
-
-      <p className="uppercase bg-orange-500 z-20 relative text-white font-bold font-mono! p-2 text rounded">
-        {code}
-      </p>
+      <div className="h-32 border-1 border-t-0 border-gray-300 rounded-b-lg flex items-center justify-center">
+        <p>hello world</p>
+      </div>
     </div>
   )
 }
@@ -112,11 +137,11 @@ const testMatchData: IMatchData[] = [
 ];
 
 const Page = () => {
-
   const [myTeamName, setMyTeamName] = useState("My Team");
   const [enemyTeamName, setEnemyTeamName] = useState("Enemy Team");
-  const [myTeamSR, setMyTeamSR] = useState(4000);
+  const [myTeamSR, setMyTeamSR] = useState("3500");
   const [matchData, setMatchData] = useState<IMatchData[]>(testMatchData);
+
 
 
 
@@ -127,6 +152,7 @@ const Page = () => {
 
     try {
       const dataUrl = await htmlToImage.toPng(ref.current);
+      console.log(dataUrl);
       const link = document.createElement("a");
       link.download = "export.png";
       link.href = dataUrl;
@@ -139,10 +165,22 @@ const Page = () => {
   return (
     <div className="">
 
+      <Dialog>
+        <DialogTrigger>Open</DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogDescription>
+              This action cannot be undone. This will permanently delete your account
+              and remove your data from our servers.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
 
       <div
         ref={ref}
-        className="flex flex-col gap-2 w-[650px]">
+        className="flex flex-col gap-2 max-w-[650px] rounded-lg">
 
         <div className="flex flex-row justify-between items-center">
           <div className="flex flex-col gap-0">
@@ -167,6 +205,8 @@ const Page = () => {
           ))
         }
 
+
+        <p className="w-full text-center text-white font-bold">gress.tmp.ooo</p>
       </div>
 
       <button

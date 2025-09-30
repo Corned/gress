@@ -14,9 +14,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased p-10 min-h-screen mx-auto max-w-[1000px]`}
+        className={`antialiased`}
       >
-        <nav className="mb-20 flex gap-2 items-center h-16 rounded-lg bg-white p-2 pl-8 backdrop-blur-2xl shadow">
+        <nav className="m-10 flex gap-2 items-center h-16 rounded-lg bg-white p-2 pl-8 backdrop-blur-2xl shadow">
 
           <p className="text-2xl font-bold">gress</p>
 
@@ -29,7 +29,9 @@ export default function RootLayout({
           <img src="/assets/icon.png" alt="icon" className="h-full aspect-square rounded" />
         </nav>
 
-        {children}
+        <main className="mx-auto max-w-[1000px]">
+          {children}
+        </main>
       </body>
     </html>
   );
