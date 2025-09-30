@@ -16,7 +16,7 @@ export default function RootLayout({
       <body
         className={`antialiased`}
       >
-        <nav className="m-10 flex gap-2 items-center h-16 rounded-lg bg-white p-2 pl-8 backdrop-blur-2xl shadow">
+        <nav className="m-10 flex gap-2 items-center h-16 rounded-lg bg-white p-2 pl-8 backdrop-blur-2xl shadow mx-auto max-w-[1000px]">
 
           <p className="text-2xl font-bold">gress</p>
 
