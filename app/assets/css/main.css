@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap");
+
+* {
+  box-sizing: border-box;
+  font-family: "Inter";
+}
+
+.transparent {
+  background-image: conic-gradient(#8F8F8F 90deg, transparent 90deg 180deg, #8F8F8F 180deg 270deg, transparent 270deg);
+  background-size: 26px 26px;
+  background-color: #BFBFBF;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  background-color: #f0f0f0;
+  position: relative;
+}
+
+.bg--gradient {
+  background-color: #B31C1C;
+  background: linear-gradient(45deg, rgba(179, 28, 28, 1) 0%, rgba(206, 57, 55, 1) 100%);
+}
+
+.rubik {
+  font-family: "Rubik" !important;
+}
+
+.instrument-serif {
+  font-family: "Instrument Serif" !important;
+}
+
+.inter {
+  font-family: "Inter" !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  border-radius: 1000px;
+  margin: 0 6px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aeaeae;
+  border-radius: 1000px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8f8f8f;
+  cursor: grab;
+}
