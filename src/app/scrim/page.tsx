@@ -31,7 +31,7 @@ const Entry = ({ map, heroBans, results, code, winningTeam }: { map: IMapData; h
   return (
     <div className={`${containerClasses} overflow-hidden`}>
       <div className={`${contentClasses} overflow-hidden relative flex flex-row gap-3 items-center h-16 p-4 z-20 select-none cursor-pointer`} onClick={toggleOpen}>
-        <div className="bg-gradient-to-r from-black/60 via-black/20 to-transparent absolute inset-0 z-10 h-16 "></div>
+        <div className="bg-gradient-to-r from-black/60 via-black/40 to-transparent absolute inset-0 z-10 h-16 "></div>
         <img src={map.thumbnail} alt="Map Type Icon" className="absolute object-cover w-full z-0 left-0 scale-105 blur-[1px]" />
         <img src={mapTypeIcons[map.type]} alt="Map Type Icon" className="z-20 h-full drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]" />
         <p className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)] font-bold text-xl uppercase text-center text-white z-20 ">
@@ -82,7 +82,7 @@ const Entry = ({ map, heroBans, results, code, winningTeam }: { map: IMapData; h
         </p>
       </div>
 
-      <div className="h-32 border-1 border-t-0 border-gray-300 rounded-b-lg flex items-center justify-center">
+      <div className="h-32 bg-[#f0f0f0] rounded-b-lg flex items-center justify-center">
         <p>hello world</p>
       </div>
     </div>
@@ -142,9 +142,6 @@ const Page = () => {
   const [myTeamSR, setMyTeamSR] = useState("3500");
   const [matchData, setMatchData] = useState<IMatchData[]>(testMatchData);
 
-
-
-
   const ref = useRef<HTMLDivElement>(null);
 
   const handleDownload = async () => {
@@ -171,7 +168,7 @@ const Page = () => {
 
       <div
         ref={ref}
-        className="flex flex-col gap-2 max-w-[650px] rounded-lg transparent p-2">
+        className="flex flex-col gap-2 max-w-[650px] transparent p-2">
 
         <div className="flex flex-row justify-between items-center">
           <div className="flex flex-col gap-0">

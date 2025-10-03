@@ -6,7 +6,7 @@ import {
   ChevronDownIcon as RiArrowDropDownLine,
 } from "lucide-react";
 
-import { heroData, IHeroDataEntry } from "../lib/heroData";
+import { heroData, IHeroData } from "../lib/heroData";
 
 const compositions = [
   {
@@ -74,7 +74,7 @@ const Composition = ({
   heroes,
 }: {
   name: string;
-  heroes: IHeroDataEntry[];
+  heroes: IHeroData[];
 }) => {
   return (
     <div className="flex flex-col items-center">

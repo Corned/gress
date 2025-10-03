@@ -6,15 +6,15 @@ import {
   ChevronDownIcon as RiArrowDropDownLine,
 } from "lucide-react";
 
-import { heroData, IHeroDataEntry } from "../lib/heroData";
+import { heroData, IHeroData } from "../lib/heroData";
 
 export interface HeroSelected {
   hero: keyof typeof heroData;
 }
 
 interface HeroPickerProps {
-  selected: IHeroDataEntry | null;
-  setSelected: (hero: IHeroDataEntry) => void;
+  selected: IHeroData | null;
+  setSelected: (hero: IHeroData) => void;
   roleFilter?: string;
 }
 
@@ -30,7 +30,7 @@ const HeroPicker: React.FC<HeroPickerProps> = ({
   const filterRef = useRef<HTMLInputElement | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const handleSelection = (herodataEntry: IHeroDataEntry) => {
+  const handleSelection = (herodataEntry: IHeroData) => {
     setSelected(herodataEntry);
     setOpen(false);
   };
@@ -84,16 +84,16 @@ const HeroPicker: React.FC<HeroPickerProps> = ({
   };
 
   const filteredHeroes = Object.values(heroData)
-    .filter((hero: IHeroDataEntry) => {
+    .filter((hero: IHeroData) => {
       return hero.role === roleFilter || !roleFilter;
     })
-    .filter((hero: IHeroDataEntry) => {
+    .filter((hero: IHeroData) => {
       return (
         hero.name.toLowerCase().includes(filter.toLowerCase()) ||
         hero.displayName.toLowerCase().includes(filter.toLowerCase())
       );
     })
-    .sort((a: IHeroDataEntry, b: IHeroDataEntry) => {
+    .sort((a: IHeroData, b: IHeroData) => {
       if (a.displayName < b.displayName) return -1;
       if (a.displayName > b.displayName) return 1;
       return 0;
