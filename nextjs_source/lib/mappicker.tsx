@@ -9,7 +9,6 @@ import CompositionPicker from "@/components/CompositionPicker";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-
 const MapRow = ({ maps }: { maps: IMapData[] }) => {
   const mapTypeIcon = mapTypeIcons[maps[0].type];
 
@@ -17,7 +16,7 @@ const MapRow = ({ maps }: { maps: IMapData[] }) => {
     <div className="flex flex-col">
       {/* <h1 id={`${maps[0].type}-maps`} className="text-[50px] xl:text-[50px] lg:text-[50px] font-bold instrument-serif">{maps[0].type} Maps</h1> */}
       <div className="grid max-lg:grid-cols-[repeat(1,1fr)] grid-cols-[repeat(3,1fr)] gap-2 max-lg:overflow-x-scroll">
-        {maps.map((map) => (
+        {maps.map(map => (
           <div
             className="relative hover:cursor-pointer hover:[&>img]:scale-110 overflow-hidden transition-all rounded-lg drop-shadow-[0_1.2px_2px_rgba(50,50,50,0.4)]"
             key={map.name}
@@ -45,13 +44,13 @@ const App = () => {
   const [selectedMode, setSelectedMode] = useState<string>("Control");
 
   const maps = Object.values(mapData);
-  const controlMaps = maps.filter((map) => map.type === "Control");
-  const escortMaps = maps.filter((map) => map.type === "Escort");
-  const hybridMaps = maps.filter((map) => map.type === "Hybrid");
-  const pushMaps = maps.filter((map) => map.type === "Push");
-  const flashpointMaps = maps.filter((map) => map.type === "Flashpoint");
+  const controlMaps = maps.filter(map => map.type === "Control");
+  const escortMaps = maps.filter(map => map.type === "Escort");
+  const hybridMaps = maps.filter(map => map.type === "Hybrid");
+  const pushMaps = maps.filter(map => map.type === "Push");
+  const flashpointMaps = maps.filter(map => map.type === "Flashpoint");
 
-  const filteredMaps = maps.filter((map) => map.type === selectedMode);
+  const filteredMaps = maps.filter(map => map.type === selectedMode);
 
   return (
     <div className="container max-lg:px-2 flex flex-col gap-10 items-center ">
@@ -69,8 +68,7 @@ const App = () => {
         <div className="flex flex-col">
           {/* <h1 id={`${maps[0].type}-maps`} className="text-[50px] xl:text-[50px] lg:text-[50px] font-bold instrument-serif">{maps[0].type} Maps</h1> */}
           <div className="grid max-lg:grid-cols-[repeat(2,1fr)] grid-cols-[repeat(3,1fr)] gap-2">
-
-            {filteredMaps.map((map) => (
+            {filteredMaps.map(map => (
               <div
                 className="relative hover:cursor-pointer hover:[&>img]:scale-110 overflow-hidden transition-all rounded-lg drop-shadow-[0_1.2px_2px_rgba(50,50,50,0.4)]"
                 key={map.name}

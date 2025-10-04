@@ -141,7 +141,7 @@ const HeroPicker: React.FC<HeroPickerProps> = ({
           <div className="h-px w-full bg-black/10" />
 
           <div className="p-2 grid gap-2 grid-cols-[repeat(auto-fill,minmax(80px,1fr))] [&>*]:aspect-square">
-            {filteredHeroes.map((hero) => (
+            {filteredHeroes.map(hero => (
               <button
                 className={cn(
                   "flex bg-gray-200 hover:bg-gray-300 shadow-[0px_2px_9px_2px_rgba(0,_0,_0,_0.05)]",

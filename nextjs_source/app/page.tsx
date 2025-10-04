@@ -1,10 +1,14 @@
 import React from "react";
 
-const CoolButton = ({ label, background }: { label: string; background: string }) => {
+const CoolButton = ({
+  label,
+  background,
+}: {
+  label: string;
+  background: string;
+}) => {
   return (
-    <button
-      className="relative rounded-lg overflow-hidden cursor-pointer p-3"
-    >
+    <button className="relative rounded-lg overflow-hidden cursor-pointer p-3">
       <img
         src={`/assets/images/maps/${background}.webp`}
         alt={`${background}-${label}`}
@@ -15,8 +19,8 @@ const CoolButton = ({ label, background }: { label: string; background: string }
         <p className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{label}</p>
       </div>
     </button>
-  )
-}
+  );
+};
 
 const Page = () => {
   return (
@@ -26,12 +30,10 @@ const Page = () => {
         Built to track Overwatch rankings and scrimmage results.
       </p>
       <div className="grid grid-cols-3 gap-4">
-
         <CoolButton label="5v5" background="kings_row" />
         <CoolButton label="Stadium" background="redwood_dam" />
         <CoolButton label="Scrims" background="lijiang_tower" />
         <CoolButton label="6v6" background="hanamura" />
-
       </div>
     </div>
   );

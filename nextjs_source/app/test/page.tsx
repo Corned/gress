@@ -9,8 +9,10 @@ const Page = () => {
   const [selectedMode, setSelectedMode] = useState<string>("Control");
   const maps = Object.values(mapData);
   const filteredMaps = maps
-    .filter((map) => map.type === selectedMode)
-    .sort((a: IMapData, b: IMapData) => a.displayName.localeCompare(b.displayName));
+    .filter(map => map.type === selectedMode)
+    .sort((a: IMapData, b: IMapData) =>
+      a.displayName.localeCompare(b.displayName),
+    );
 
   return (
     <div className="flex flex-col gap-10 items-center">
@@ -20,11 +22,13 @@ const Page = () => {
           <Button onClick={() => setSelectedMode("Escort")}>Escort</Button>
           <Button onClick={() => setSelectedMode("Hybrid")}>Hybrid</Button>
           <Button onClick={() => setSelectedMode("Push")}>Push</Button>
-          <Button onClick={() => setSelectedMode("Flashpoint")}>Flashpoint</Button>
+          <Button onClick={() => setSelectedMode("Flashpoint")}>
+            Flashpoint
+          </Button>
         </div>
         <div className="flex flex-col">
           <div className="grid grid-cols-[repeat(3,1fr)] gap-2">
-            {filteredMaps.map((map) => (
+            {filteredMaps.map(map => (
               <div
                 className="relative hover:cursor-pointer  overflow-hidden transition-all rounded-lg drop-shadow-[0_1.2px_2px_rgba(50,50,50,0.4)]"
                 key={map.name}

@@ -6,9 +6,14 @@
 }
 
 .transparent {
-  background-image: conic-gradient(#8F8F8F 90deg, transparent 90deg 180deg, #8F8F8F 180deg 270deg, transparent 270deg);
+  background-image: conic-gradient(
+    #8f8f8f 90deg,
+    transparent 90deg 180deg,
+    #8f8f8f 180deg 270deg,
+    transparent 270deg
+  );
   background-size: 26px 26px;
-  background-color: #BFBFBF;
+  background-color: #bfbfbf;
 }
 
 html,
@@ -20,8 +25,12 @@ body,
 }
 
 .bg--gradient {
-  background-color: #B31C1C;
-  background: linear-gradient(45deg, rgba(179, 28, 28, 1) 0%, rgba(206, 57, 55, 1) 100%);
+  background-color: #b31c1c;
+  background: linear-gradient(
+    45deg,
+    rgba(179, 28, 28, 1) 0%,
+    rgba(206, 57, 55, 1) 100%
+  );
 }
 
 .rubik {

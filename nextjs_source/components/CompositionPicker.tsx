@@ -199,12 +199,12 @@ const CompositionPicker: React.FC<HeroPickerProps> = ({
           <div className="h-px w-full bg-black/10" />
 
           <div className="max-h-[400px] overflow-y-auto p-2.5">
-            {compositions.map((composition) => {
+            {compositions.map(composition => {
               const heroes = [
                 ...composition.tank,
                 ...composition.damage,
                 ...composition.support,
-              ].map((heroName) => heroData[heroName as keyof typeof heroData]);
+              ].map(heroName => heroData[heroName as keyof typeof heroData]);
               return (
                 <button
                   className="flex flex-col gap-4 w-full rounded-md bg-white hover:bg-gray-200 transition-colors justify-center"

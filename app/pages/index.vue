@@ -1,7 +1,5 @@
-
 <template>
   <section>
-
     <div class="flex flex-col gap-10">
       <h1 class="text-7xl font-bold">gress</h1>
       <p class="text-lg text-gray-600">
@@ -14,8 +12,6 @@
         <CategoryButton label="Scrims" background="lijiang_tower" />
         <CategoryButton label="6v6" background="hanamura" />
       </div>
-
     </div>
-
   </section>
 </template>
