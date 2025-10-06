@@ -15,7 +15,7 @@
   });
 
   const disabledClass = computed(() =>
-    props.disabled ? " opacity-50 saturate-50" : "cursor-pointer"
+    props.disabled ? "opacity-50 saturate-50" : "cursor-pointer"
   );
 
 </script>
