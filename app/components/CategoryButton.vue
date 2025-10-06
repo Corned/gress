@@ -1,5 +1,27 @@
+<script setup>
+  const props = defineProps({
+    label: {
+      type: String,
+      required: true,
+    },
+    background: {
+      type: String,
+      required: true,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+  });
+
+  const disabledClass = computed(() =>
+    props.disabled ? " opacity-50 saturate-50" : "cursor-pointer"
+  );
+
+</script>
+
 <template>
-  <button class="relative rounded-lg overflow-hidden cursor-pointer p-3">
+  <button :class="`relative rounded-lg overflow-hidden p-3 ${disabledClass}`">
     <img
       :src="`/assets/images/maps/${background}.webp`"
       :alt="`${background}-${label}`"
@@ -13,15 +35,3 @@
   </button>
 </template>
 
-<script setup>
-  defineProps({
-    label: {
-      type: String,
-      required: true,
-    },
-    background: {
-      type: String,
-      required: true,
-    },
-  });
-</script>

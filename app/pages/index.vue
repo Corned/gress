@@ -7,10 +7,10 @@
       </p>
 
       <div class="grid grid-cols-3 gap-4">
-        <CategoryButton label="5v5" background="kings_row" />
-        <CategoryButton label="Stadium" background="redwood_dam" />
-        <CategoryButton label="Scrims" background="lijiang_tower" />
-        <CategoryButton label="6v6" background="hanamura" />
+        <CategoryButton label="5v5" background="kings_row" :disabled="true"/>
+        <CategoryButton label="Stadium" background="redwood_dam" :disabled="true"/>
+        <CategoryButton label="Scrims" background="lijiang_tower" :disabled="false"/>
+        <CategoryButton label="6v6" background="hanamura" :disabled="true"/>
       </div>
     </div>
   </section>
