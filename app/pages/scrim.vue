@@ -1,53 +1,3 @@
-<template>
-  <section>
-    <div class="flex flex-col gap-2 max-w-[650px] transparent p-2">
-      <div class="flex flex-row justify-between items-center">
-        <div class="flex flex-col gap-0">
-          <p
-            class="text-3xl text-white font-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]"
-          >
-            {{ myTeamName }}
-          </p>
-          <p
-            class="text-2xl text-white font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]"
-          >
-            vs. {{ enemyTeamName }}
-          </p>
-        </div>
-        <div>
-          <p
-            class="text-6xl text-white font-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]"
-          >
-            {{ myTeamSR }}
-          </p>
-        </div>
-      </div>
-
-      <ScrimEntry
-        v-for="(entry, i) in testMatchData"
-        :key="i"
-        :map="entry.map"
-        :hero-bans="entry.heroBans"
-        :results="entry.results"
-        :code="entry.code"
-        :winning-team="entry.winningTeam"
-      />
-
-      <p
-        class="w-full text-center text-white font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]"
-      >
-        gress.tmp.ooo
-      </p>
-    </div>
-
-    <button
-      class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-    >
-      Download as PNG
-    </button>
-  </section>
-</template>
-
 <script setup>
   import { ref } from "vue";
   import { mapData } from "~/lib/mapData";
@@ -95,3 +45,57 @@
     },
   ];
 </script>
+
+
+<template>
+  <section>
+    <ScrimEntryBuilder :passFormState="(x) => console.log(x)" />
+
+    <div class="flex flex-col gap-2 w-fit transparent p-2">
+      <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-col gap-0">
+          <p
+            class="text-3xl text-white font-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]"
+          >
+            {{ myTeamName }}
+          </p>
+          <p
+            class="text-2xl text-white font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]"
+          >
+            vs. {{ enemyTeamName }}
+          </p>
+        </div>
+        <div>
+          <p
+            class="text-6xl text-white font-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]"
+          >
+            {{ myTeamSR }}
+          </p>
+        </div>
+      </div>
+
+      <ScrimEntry
+        v-for="(entry, i) in testMatchData"
+        :key="i"
+        :map="entry.map"
+        :hero-bans="entry.heroBans"
+        :results="entry.results"
+        :code="entry.code"
+        :winning-team="entry.winningTeam"
+      />
+
+      <p
+        class="w-full text-center text-white font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]"
+      >
+        gress.tmp.ooo
+      </p>
+    </div>
+
+    <button
+      class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+    >
+      Download as PNG
+    </button>
+  </section>
+</template>
+

@@ -1,3 +1,10 @@
+<script setup>
+const appConfig = useAppConfig()
+console.log({appConfig});
+
+
+</script>
+
 <template>
   <div>
     <nav

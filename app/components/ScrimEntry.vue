@@ -1,9 +1,43 @@
+<script setup>
+  import { ref } from "vue";
+  import { mapTypeIcons } from "~/lib/mapData";
+
+  defineProps({
+    map: {
+      type: Object,
+      required: true,
+    },
+    heroBans: {
+      type: Array,
+      required: true,
+    },
+    results: {
+      type: Array,
+      required: true,
+    },
+    code: {
+      type: String,
+      required: true,
+    },
+    winningTeam: {
+      type: Number,
+      required: true,
+    },
+  });
+
+  const isOpen = ref(false);
+  const toggleOpen = () => {
+    //isOpen.value = !isOpen.value;
+  };
+</script>
+
+
 <template>
-  <div :class="[isOpen ? 'h-auto' : 'h-16', 'overflow-hidden']">
+  <div :class="[isOpen ? 'h-auto' : 'h-16', 'overflow-hidden min-w-[640px]']">
     <div
       :class="[
         isOpen ? 'rounded-t-lg' : 'rounded-lg',
-        'overflow-hidden relative flex flex-row gap-3 items-center h-16 p-4 z-20 select-none cursor-pointer',
+        'overflow-hidden relative flex flex-row gap-3 items-center h-16 p-4 z-20 select-none',
       ]"
       @click="toggleOpen"
     >
@@ -60,43 +94,9 @@
         {{ code }}
       </p>
     </div>
-    <div
-      class="h-32 bg-[#f0f0f0] rounded-b-lg flex items-center justify-center"
-    >
+    <div class="h-32 bg-[#f0f0f0] rounded-b-lg flex items-center justify-center">
       <p>hello world</p>
     </div>
   </div>
 </template>
 
-<script>
-  import { ref } from "vue";
-  import { mapTypeIcons } from "~/lib/mapData";
-
-  const props = defineProps({
-    map: {
-      type: Object,
-      required: true,
-    },
-    heroBans: {
-      type: Array,
-      required: true,
-    },
-    results: {
-      type: Array,
-      required: true,
-    },
-    code: {
-      type: String,
-      required: true,
-    },
-    winningTeam: {
-      type: Number,
-      required: true,
-    },
-  });
-
-  const isOpen = ref(false);
-  const toggleOpen = () => {
-    isOpen.value = !isOpen.value;
-  };
-</script>
