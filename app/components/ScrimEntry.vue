@@ -37,7 +37,7 @@
     <div
       :class="[
         isOpen ? 'rounded-t-lg' : 'rounded-lg',
-        'overflow-hidden relative flex flex-row gap-3 items-center h-16 p-4 z-20 select-none',
+        'overflow-hidden relative flex flex-row gap-3 items-center h-16 p-3 z-20 select-none',
       ]"
       @click="toggleOpen"
     >
@@ -72,26 +72,28 @@
       </div>
       <p
         v-if="winningTeam === 0"
-        class="uppercase bg-green-600 z-20 relative text-white font-bold font-mono! p-2 text rounded"
+        class="uppercase bg-green-600 z-20 relative text-white font-bold font-mono! p-2 h-full rounded flex items-center justify-center"
       >
         {{ results.join("-") }}
       </p>
       <p
         v-else-if="winningTeam === 1"
-        class="uppercase bg-red-500 z-20 relative text-white font-bold font-mono! p-2 text rounded"
+        class="uppercase bg-red-500 z-20 relative text-white font-bold font-mono! p-2 h-full rounded flex items-center justify-center"
       >
         {{ results.join("-") }}
       </p>
       <p
         v-else-if="winningTeam === 2"
-        class="uppercase bg-gray-500 z-20 relative text-white font-bold font-mono! p-2 text rounded"
+        class="uppercase bg-gray-500 z-20 relative text-white font-bold font-mono! p-2 h-full rounded flex items-center justify-center"
       >
         {{ results.join("-") }}
       </p>
       <p
-        class="uppercase bg-orange-500 z-20 relative text-white font-bold font-mono! p-2 text rounded"
+        class="uppercase bg-orange-500 z-20 relative text-white font-bold font-mono! p-2 h-full rounded flex items-center justify-center"
       >
-        {{ code }}
+        <span>
+          {{ code }}
+        </span>
       </p>
     </div>
     <div class="h-32 bg-[#f0f0f0] rounded-b-lg flex items-center justify-center">
