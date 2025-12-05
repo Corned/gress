@@ -36,7 +36,7 @@
   <div :class="[isOpen ? 'h-auto' : 'h-16', 'overflow-hidden min-w-[640px]']">
     <div
       :class="[
-        isOpen ? 'rounded-t-lg' : 'rounded-lg',
+        isOpen ? 'rounded-t-lg' : 'rounded-sm',
         'overflow-hidden relative flex flex-row gap-3 items-center h-16 p-4 z-20 select-none',
       ]"
       @click="toggleOpen"
