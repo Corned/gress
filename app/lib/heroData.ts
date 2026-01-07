@@ -230,6 +230,12 @@ export const heroData = {
     thumbnail: "/assets/images/icons/tracer.webp",
     role: "Damage",
   },
+  Vendetta: {
+    name: "Vendetta",
+    displayName: "Vendetta",
+    thumbnail: "/assets/images/icons/vendetta.webp",
+    role: "Damage",
+  },
   Venture: {
     name: "Venture",
     displayName: "Venture",
