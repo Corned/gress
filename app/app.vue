@@ -1,13 +1,13 @@
 <script setup>
 const appConfig = useAppConfig()
-console.log({appConfig});
+console.log({ appConfig });
 
 
 </script>
 
 <template>
   <div>
-    <nav
+    <!--     <nav
       class="m-10 flex gap-2 items-center h-16 rounded-lg bg-white p-2 pl-8 backdrop-blur-2xl shadow mx-auto max-w-[1000px]"
     >
       <p class="text-2xl font-bold">gress</p>
@@ -24,8 +24,8 @@ console.log({appConfig});
         alt="icon"
         class="h-full aspect-square rounded"
       />
-    </nav>
+    </nav> -->
 
-    <NuxtPage class="max-w-[1000px] mx-auto" />
+    <NuxtPage class="max-w-2xl mx-auto mt-10" />
   </div>
 </template>

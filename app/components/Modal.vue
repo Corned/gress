@@ -1,32 +1,24 @@
 <script setup lang="ts">
 const props = defineProps({
-  triggerText: {
-    type: String,
-    default: "Open Modal"
+  modelValue: {
+    type: Boolean,
+    default: false
   }
 })
-const open = ref(false)
+
+const emit = defineEmits(['update:modelValue'])
 
 const close = () => {
-  open.value = false;
+  emit('update:modelValue', false)
 }
-
-defineExpose({
-  close
-})
 </script>
 
 <template>
-  <div @click="open = true" class="w-fit h-fit">
-    <slot name="trigger">
-      <button>{{ triggerText }}</button>
-    </slot>
-  </div>
   <transition name="fade">
-    <div v-if="open" @click="open = false"
-      class="fixed inset-0 bg-black/20 backdrop-blur-[2px] z-50 flex items-center justify-center">
-      <transition appear name="transition">
-        <div class="" @click.stop>
+    <div v-if="modelValue" @click="close"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+      <transition appear name="scale">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl overflow-hidden" @click.stop>
           <slot />
         </div>
       </transition>
