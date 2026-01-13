@@ -4,20 +4,23 @@ import { mapData } from "~/lib/mapData";
 import { heroData } from "~/lib/heroData";
 import { toPng } from "html-to-image";
 
-const myTeamName = useState("scrim-my-team-name", () => "My Team");
-const enemyTeamName = useState("scrim-enemy-team-name", () => "Enemy Team");
-const skillLevel = useState("scrim-skill-level", () => "4200");
+// Scrim data
+const scrimInfo = useState("scrim-info", () => ({
+  myTeamName: "My Team",
+  enemyTeamName: "Enemy Team",
+  skillLevel: "4200",
+}));
 
-const testMatchData = useState("scrim-match-data", () => []);
+const matchEntries = useState("scrim-match-data", () => []);
 
-// Initialize draft entry state
-const draftEntry = ref({
+// Form state
+const draftEntry = useState(() => ({
   map: mapData['LijiangTower'],
   heroBans: [heroData.Lucio, heroData.Dva],
   results: [0, 0],
   code: '',
   winningTeam: 0 // 0: Us, 1: Enemy, 2: Draw
-});
+}));
 
 const editingIndex = ref(-1);
 const isSnapshotting = ref(false);
@@ -26,7 +29,7 @@ const showEntryModal = ref(false);
 const addScrimEntry = () => {
   if (editingIndex.value > -1) {
     // Update existing entry
-    testMatchData.value[editingIndex.value] = {
+    matchEntries.value[editingIndex.value] = {
       map: draftEntry.value.map,
       heroBans: [...draftEntry.value.heroBans],
       results: [...draftEntry.value.results],
@@ -36,7 +39,7 @@ const addScrimEntry = () => {
     cancelEdit();
   } else {
     // Add new entry
-    testMatchData.value.push({
+    matchEntries.value.push({
       map: draftEntry.value.map,
       heroBans: [...draftEntry.value.heroBans],
       results: [...draftEntry.value.results],
@@ -51,13 +54,15 @@ const addScrimEntry = () => {
 };
 
 const resetDraft = () => {
+  draftEntry.value.map = mapData['LijiangTower'];
+  draftEntry.value.heroBans = [heroData.Lucio, heroData.Dva];
   draftEntry.value.results = [0, 0];
   draftEntry.value.code = '';
   draftEntry.value.winningTeam = 2; // draw
 }
 
 const startEdit = (index) => {
-  const entry = testMatchData.value[index];
+  const entry = matchEntries.value[index];
   draftEntry.value = {
     map: entry.map,
     heroBans: [...entry.heroBans],
@@ -76,7 +81,7 @@ const cancelEdit = () => {
 };
 
 const removeScrimEntry = (index) => {
-  testMatchData.value.splice(index, 1);
+  matchEntries.value.splice(index, 1);
   if (editingIndex.value === index) {
     cancelEdit();
   } else if (editingIndex.value > index) {
@@ -94,14 +99,12 @@ const downloadAsPng = async () => {
 
   try {
     element.classList.toggle("transparent");
-    // Temporarily hide delete buttons for screenshot if they are inside the element
-    // With the new layout, delete buttons will be outside specific entries or handled via CSS classes if needed,
-    // but here we are snapshotting #scrimDisplay. I'll ensure delete buttons are separate or hidden.
     const dataUrl = await toPng(element, { backgroundColor: null });
     element.classList.toggle("transparent");
+
     const link = document.createElement('a');
     link.href = dataUrl;
-    link.download = `${myTeamName.value}_vs_${enemyTeamName.value}.png`;
+    link.download = `${scrimInfo.value.myTeamName}_vs_${scrimInfo.value.enemyTeamName}.png`;
     link.click();
   } catch (err) {
     console.error("Failed to download PNG", err);
@@ -116,64 +119,50 @@ const downloadAsPng = async () => {
   <section class="flex flex-col gap-6 items-center">
 
     <!-- Control Bar & Actions -->
-    <div
-      class="bg-gray-50 p-3 rounded-lg shadow-sm border border-gray-200 flex flex-wrap gap-4 items-end justify-between w-full max-w-5xl sticky top-4 z-40">
 
-      <div class="flex items-end gap-3 flex-grow">
-        <div class="flex flex-col gap-1 flex-1 min-w-[140px]">
-          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Your Team Name</label>
-          <input type="text" v-model="myTeamName" class="p-2 border rounded w-full bg-white text-sm" />
-        </div>
+    <ScrimInfoForm v-model="scrimInfo" />
 
-        <div class="flex flex-col gap-1 flex-1 min-w-[140px]">
-          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Enemy Team Name</label>
-          <input type="text" v-model="enemyTeamName" class="p-2 border rounded w-full bg-white text-sm" />
-        </div>
 
-        <div class="flex flex-col gap-1 w-24">
-          <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Skill Level</label>
-          <input type="text" v-model="skillLevel" class="p-2 border rounded w-full bg-white text-sm" />
-        </div>
-      </div>
+    <div class="flex gap-2">
+      <button @click="showEntryModal = true"
+        class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition font-bold shadow-sm cursor-pointer text-sm flex items-center gap-2">
+        <span>+</span> Add Entry
+      </button>
 
-      <div class="flex gap-2">
-        <button @click="showEntryModal = true"
-          class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition font-bold shadow-sm cursor-pointer text-sm flex items-center gap-2">
-          <span>+</span> Add Entry
-        </button>
-
-        <button @click="downloadAsPng"
-          class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition font-bold shadow-sm cursor-pointer text-sm flex items-center gap-2">
-          <span>💾</span> Save Image
-        </button>
-      </div>
-
+      <button @click="downloadAsPng"
+        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition font-bold shadow-sm cursor-pointer text-sm flex items-center gap-2">
+        <span>💾</span> Save Image
+      </button>
     </div>
+
+
 
 
     <!-- Main Preview Area -->
     <div id="scrimDisplay" class="flex flex-col gap-2 transparent p-2 relative w-[640px] rounded-lg">
-      <div v-if="myTeamName || enemyTeamName || skillLevel" class="flex flex-row justify-between items-center">
+      <div v-if="scrimInfo.myTeamName || scrimInfo.enemyTeamName || scrimInfo.skillLevel"
+        class="flex flex-row justify-between items-center">
         <div class="flex flex-col gap-0">
-          <p v-if="myTeamName"
+          <p v-if="scrimInfo.myTeamName"
             class="text-3xl text-white font-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)] leading-tight">
-            {{ myTeamName }}
+            {{ scrimInfo.myTeamName }}
           </p>
-          <p v-if="enemyTeamName"
+          <p v-if="scrimInfo.enemyTeamName"
             class="text-2xl text-white font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)] leading-tight">
-            {{ 'vs. ' + enemyTeamName }}
+            {{ 'vs. ' + scrimInfo.enemyTeamName }}
           </p>
         </div>
         <div>
-          <p v-if="skillLevel" class="text-6xl text-white font-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]">
-            {{ skillLevel }}
+          <p v-if="scrimInfo.skillLevel"
+            class="text-6xl text-white font-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]">
+            {{ scrimInfo.skillLevel }}
           </p>
         </div>
       </div>
 
       <!-- Render Committed Entries -->
 
-      <div v-for="(entry, i) in testMatchData" :key="i" class="relative group">
+      <div v-for="(entry, i) in matchEntries" :key="i" class="relative group">
         <!-- Render Entry -->
         <ScrimEntry :map="editingIndex === i ? draftEntry.map : entry.map"
           :hero-bans="editingIndex === i ? draftEntry.heroBans : entry.heroBans"
