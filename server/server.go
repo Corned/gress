@@ -1,24 +1,28 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-  // Create a Gin router with default middleware (logger and recovery)
-  r := gin.Default()
+    r := gin.Default()
 
-  // Define a simple GET endpoint
-  r.GET("/ping", func(c *gin.Context) {
-    // Return JSON response
-    c.JSON(http.StatusOK, gin.H{
-      "message": "pong",
+    // 1. Serve static files (CSS, JS, Images)
+    // specific folders from inside your 'public' directory
+    r.Static("/_nuxt", "./public/_nuxt")
+    r.Static("/assets", "./public/assets") // if you have one
+    r.StaticFile("/favicon.ico", "./public/favicon.ico")
+
+    // 2. Serve the index.html for the root route
+    r.GET("/", func(c *gin.Context) {
+        c.File("./public/index.html")
     })
-  })
 
-  // Start server on port 8080 (default)
-  // Server will listen on 0.0.0.0:8080 (localhost:8080 on Windows)
-  r.Run()
+    // 3. SPA Fallback (The important part!)
+    // If a route is not found (like /dashboard), serve index.html
+    r.NoRoute(func(c *gin.Context) {
+        c.File("./public/index.html")
+    })
+
+    r.Run() // listen and serve on 0.0.0.0:8080
 }
