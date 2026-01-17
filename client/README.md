@@ -1,9 +1,3 @@
-# gress
-
-Gress is an application built to track Overwatch rankings and scrimmage results.
-
-
-
 
 # Nuxt Minimal Starter
 
