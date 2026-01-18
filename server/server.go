@@ -14,19 +14,19 @@ func main() {
         log.Fatal("Error loading .env file")
     }
     
-    r := gin.Default()
+    router := gin.Default()
 
-    r.Static("/_nuxt", "./public/_nuxt")
-    r.Static("/assets", "./public/assets")
-    r.StaticFile("/favicon.ico", "./public/favicon.ico")
+    router.Static("/_nuxt", "./public/_nuxt")
+    router.Static("/assets", "./public/assets")
+    router.StaticFile("/favicon.ico", "./public/favicon.ico")
 
-    r.GET("/", func(c *gin.Context) {
-        c.File("./public/index.html")
+    router.GET("/", func(context *gin.Context) {
+        context.File("./public/index.html")
     })
 
-    r.NoRoute(func(c *gin.Context) {
-        c.File("./public/index.html")
+    router.NoRoute(func(context *gin.Context) {
+        context.File("./public/index.html")
     })
 
-	r.Run(":" + os.Getenv("PORT"))
+    router.Run(":" + os.Getenv("PORT"))
 }
