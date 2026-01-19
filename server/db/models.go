@@ -9,7 +9,7 @@ type ScrimBlock struct {
 	Entries []Entry `bson:"entries"`
 }
 	
-// Change mapName and bans to use ids
+// TODO: Change mapName and bans to use ids
 type Entry struct {
 	mapName string `bson:"mapName"`
 	team1Ban string `bson:"team1Ban"`
