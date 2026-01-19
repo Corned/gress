@@ -4,6 +4,8 @@ import { mapData } from "~/lib/mapData";
 import { heroData } from "~/lib/heroData";
 import { toPng } from "html-to-image";
 
+
+
 // Scrim data
 const scrimInfo = useState("scrim-info", () => ({
   myTeamName: "My Team",
@@ -120,7 +122,7 @@ const downloadAsPng = async () => {
 
     <!-- Control Bar & Actions -->
 
-    <ScrimInfoForm v-model="scrimInfo" />
+    <ScrimBlockInfo v-model="scrimInfo" />
 
 
     <div class="flex gap-2">
