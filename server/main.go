@@ -15,10 +15,12 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	_, err := db.Connect()
+	client, err := db.Connect()
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	db.Create(client)
 
 	r := router.Setup()
 
