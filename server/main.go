@@ -4,7 +4,6 @@ import (
 	"log"
 	"os"
 
-	"gress-server/db"
 	"gress-server/router"
 
 	"github.com/joho/godotenv"
@@ -12,15 +11,14 @@ import (
 
 func main() {
 	if err := godotenv.Load(); err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("Error loading .env file")
 	}
 
-	client, err := db.Connect()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	db.Create(client)
+	// client, err := db.Connect()
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// db.Create(client)
 
 	r := router.Setup()
 
