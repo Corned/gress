@@ -6,7 +6,7 @@ Gress is an application built to track Overwatch 2 scrimmage results.
 
 ## Setup and Running
 
-Create a ´.env´ file in `./server`
+Create a `.env` file in `./server`
 ```
 PORT=8080
 MONGODB_URI=...
@@ -14,4 +14,6 @@ MONGODB_URI=...
 
 ## Build and Run
 
-> ./deploy.sh
+```
+./deploy.sh
+```
