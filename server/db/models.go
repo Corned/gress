@@ -11,11 +11,11 @@ type ScrimBlock struct {
 	
 // TODO: Change mapName and bans to use ids
 type Entry struct {
-	mapName string `bson:"mapName"`
-	team1Ban string `bson:"team1Ban"`
-	team2Ban string `bson:"team2Ban"`
-	team1Score int `bson:"team1Score"`
-	team2Score int `bson:"team2Score"`
-	code string `bson:"code"`
-	winningTeam int `bson:"winningTeam"`
+	MapName string `bson:"mapName"`
+	Team1Ban string `bson:"team1Ban"`
+	Team2Ban string `bson:"team2Ban"`
+	Team1Score int `bson:"team1Score"`
+	Team2Score int `bson:"team2Score"`
+	Code string `bson:"code"`
+	WinningTeam int `bson:"winningTeam"`
 }

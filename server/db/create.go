@@ -15,11 +15,23 @@ func Create(client *mongo.Client) {
 	fmt.Println("Creating entry...")
 
 	// "gress" is the database name, "entries" is the collection name
-	collection := client.Database("gress").Collection("entries")
+	collection := client.Database("gress").Collection("scrimBlocks")
 
-	newEntry := Entry{
-		Title:   "My First Post",
-		Content: "This is some content for the database.",
+	newEntry := ScrimBlock{
+		Team1: "Team 1",
+		Team2: "Team 2",
+		Date: time.Now(),
+		Entries: []Entry{
+			{
+				MapName: "Shambali Monestary",
+				Team1Ban: "Brigitte",
+				Team2Ban: "Sigma",
+				Team1Score: 3,
+				Team2Score: 1,
+				Code: "M0NG0",
+				WinningTeam: 1,
+			},
+		},
 	}
 
 	// Create a context with a timeout for the operation
