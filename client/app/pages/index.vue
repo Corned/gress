@@ -18,8 +18,10 @@ const matchEntries = useState("scrim-match-data", () => []);
 // Form state
 const draftEntry = useState(() => ({
   map: mapData['LijiangTower'],
-  heroBans: [heroData.Lucio, heroData.Dva],
-  results: [0, 0],
+  team1Ban: heroData.Lucio,
+  team2Ban: heroData.Dva,
+  team1Score: 0,
+  team2Score: 0,
   code: '',
   winningTeam: 0 // 0: Us, 1: Enemy, 2: Draw
 }));
@@ -33,8 +35,10 @@ const addScrimEntry = () => {
     // Update existing entry
     matchEntries.value[editingIndex.value] = {
       map: draftEntry.value.map,
-      heroBans: [...draftEntry.value.heroBans],
-      results: [...draftEntry.value.results],
+      team1Ban: draftEntry.value.team1Ban,
+      team2Ban: draftEntry.value.team2Ban,
+      team1Score: draftEntry.value.team1Score,
+      team2Score: draftEntry.value.team2Score,
       code: draftEntry.value.code,
       winningTeam: draftEntry.value.winningTeam,
     };
@@ -43,8 +47,10 @@ const addScrimEntry = () => {
     // Add new entry
     matchEntries.value.push({
       map: draftEntry.value.map,
-      heroBans: [...draftEntry.value.heroBans],
-      results: [...draftEntry.value.results],
+      team1Ban: draftEntry.value.team1Ban,
+      team2Ban: draftEntry.value.team2Ban,
+      team1Score: draftEntry.value.team1Score,
+      team2Score: draftEntry.value.team2Score,
       code: draftEntry.value.code,
       winningTeam: draftEntry.value.winningTeam,
     });
@@ -57,8 +63,10 @@ const addScrimEntry = () => {
 
 const resetDraft = () => {
   draftEntry.value.map = mapData['LijiangTower'];
-  draftEntry.value.heroBans = [heroData.Lucio, heroData.Dva];
-  draftEntry.value.results = [0, 0];
+  draftEntry.value.team1Ban = heroData.Lucio;
+  draftEntry.value.team2Ban = heroData.Dva;
+  draftEntry.value.team1Score = 0;
+  draftEntry.value.team2Score = 0;
   draftEntry.value.code = '';
   draftEntry.value.winningTeam = 2; // draw
 }
@@ -67,8 +75,10 @@ const startEdit = (index) => {
   const entry = matchEntries.value[index];
   draftEntry.value = {
     map: entry.map,
-    heroBans: [...entry.heroBans],
-    results: [...entry.results],
+    team1Ban: entry.team1Ban,
+    team2Ban: entry.team2Ban,
+    team1Score: entry.team1Score,
+    team2Score: entry.team2Score,
     code: entry.code,
     winningTeam: entry.winningTeam
   };
@@ -166,12 +176,10 @@ const downloadAsPng = async () => {
 
       <div v-for="(entry, i) in matchEntries" :key="i" class="relative group">
         <!-- Render Entry -->
-        <ScrimEntry :map="editingIndex === i ? draftEntry.map : entry.map"
-          :hero-bans="editingIndex === i ? draftEntry.heroBans : entry.heroBans"
-          :results="editingIndex === i ? draftEntry.results : entry.results"
-          :code="editingIndex === i ? draftEntry.code : entry.code"
-          :winning-team="editingIndex === i ? draftEntry.winningTeam : entry.winningTeam" :has-overlay="!isSnapshotting"
-          @edit="startEdit(i)" @delete="removeScrimEntry(i)" />
+        <ScrimEntry :map="entry.map" :team1Ban="entry.team1Ban" :team2Ban="entry.team2Ban"
+          :team1Score="entry.team1Score" :team2Score="entry.team2Score" :code="entry.code"
+          :winning-team="entry.winningTeam" :has-overlay="!isSnapshotting" @edit="startEdit(i)"
+          @delete="removeScrimEntry(i)" />
       </div>
 
       <p class="w-full text-center text-white font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.5)]">
@@ -194,8 +202,9 @@ const downloadAsPng = async () => {
         <div class="flex flex-col gap-6">
           <div class="">
             <h2 class="font-bold text-gray-400 uppercase tracking-wider block mb-1">Preview</h2>
-            <ScrimEntry :map="draftEntry.map" :hero-bans="draftEntry.heroBans" :results="draftEntry.results"
-              :code="draftEntry.code" :winning-team="draftEntry.winningTeam" />
+            <ScrimEntry :map="draftEntry.map" :team1Ban="draftEntry.team1Ban" :team2Ban="draftEntry.team2Ban"
+              :team1Score="draftEntry.team1Score" :team2Score="draftEntry.team2Score" :code="draftEntry.code"
+              :winning-team="draftEntry.winningTeam" />
           </div>
 
           <ScrimEntryBuilder v-model="draftEntry" :isEditing="editingIndex > -1" @submit="addScrimEntry"

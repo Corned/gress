@@ -16,15 +16,18 @@ const props = defineProps({
 const emit = defineEmits(['submit', 'cancel']);
 
 // Watch for score changes to auto-set winning team
-watch(() => props.modelValue.results, (newVal) => {
-  if (newVal[0] > newVal[1]) {
-    props.modelValue.winningTeam = 0;
-  } else if (newVal[0] < newVal[1]) {
-    props.modelValue.winningTeam = 1;
-  } else {
-    props.modelValue.winningTeam = 2;
+watch(
+  [() => props.modelValue.team1Score, () => props.modelValue.team2Score],
+  ([team1Score, team2Score]) => {
+    if (team1Score > team2Score) {
+      props.modelValue.winningTeam = 0;
+    } else if (team1Score < team2Score) {
+      props.modelValue.winningTeam = 1;
+    } else {
+      props.modelValue.winningTeam = 2;
+    }
   }
-}, { deep: true });
+);
 
 const handleSubmit = () => {
   emit('submit');
@@ -50,12 +53,12 @@ const handleSubmit = () => {
     <div class="flex flex-col gap-1">
       <label class="text-xs font-bold text-gray-500 uppercase">Hero Bans (Ours - Theirs)</label>
       <div class="flex gap-2">
-        <select v-model="modelValue.heroBans[0]" class="p-2 border rounded w-full text-sm bg-white">
+        <select v-model="modelValue.team1Ban" class="p-2 border rounded w-full text-sm bg-white">
           <option v-for="h in heroData" :key="h.name" :value="h">
             {{ h.displayName }}
           </option>
         </select>
-        <select v-model="modelValue.heroBans[1]" class="p-2 border rounded w-full text-sm bg-white">
+        <select v-model="modelValue.team2Ban" class="p-2 border rounded w-full text-sm bg-white">
           <option v-for="h in heroData" :key="h.name" :value="h">
             {{ h.displayName }}
           </option>
@@ -74,10 +77,10 @@ const handleSubmit = () => {
     <div class="flex flex-col gap-1">
       <label class="text-xs font-bold text-gray-500 uppercase">Score (Us - Enemy)</label>
       <div class="flex gap-2 items-center">
-        <input type="number" v-model="modelValue.results[0]" class="p-2 border rounded w-full text-sm bg-white"
+        <input type="number" v-model="modelValue.team1Score" class="p-2 border rounded w-full text-sm bg-white"
           min="0" />
         <span class="font-bold text-gray-400">-</span>
-        <input type="number" v-model="modelValue.results[1]" class="p-2 border rounded w-full text-sm bg-white"
+        <input type="number" v-model="modelValue.team2Score" class="p-2 border rounded w-full text-sm bg-white"
           min="0" />
       </div>
     </div>

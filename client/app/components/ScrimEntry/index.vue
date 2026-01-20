@@ -12,12 +12,20 @@ defineProps({
     type: Object,
     required: true,
   },
-  heroBans: {
-    type: Array,
+  team1Ban: {
+    type: String,
     required: true,
   },
-  results: {
-    type: Array,
+  team2Ban: {
+    type: String,
+    required: true,
+  },
+  team1Score: {
+    type: Number,
+    required: true,
+  },
+  team2Score: {
+    type: Number,
     required: true,
   },
   code: {
@@ -53,11 +61,13 @@ defineEmits(['edit', 'delete']);
       <div class="flex-grow"></div>
       <!-- HERO BANS -->
       <div class="flex flex-row gap-2 z-20">
-        <img v-for="hero in heroBans" :key="hero.name" :src="hero.thumbnail" :alt="hero.name"
+        <img :src="team1Ban.thumbnail" :alt="team1Ban"
+          class="h-12 z-20 relative rounded-lg border-2 border-red-500 saturate-40" />
+        <img :src="team2Ban.thumbnail" :alt="team2Ban"
           class="h-12 z-20 relative rounded-lg border-2 border-red-500 saturate-40" />
       </div>
 
-      <Score :team1Score="results[0]" :team2Score="results[1]" :winningTeam="winningTeam" />
+      <Score :team1Score="team1Score" :team2Score="team2Score" :winningTeam="winningTeam" />
       <ReplayCode :code="code" />
     </div>
   </div>
