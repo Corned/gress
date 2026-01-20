@@ -5,6 +5,7 @@ import { mapTypeIcons } from "~/lib/mapData";
 import Score from "./_Score.vue"
 import ReplayCode from "./_ReplayCode.vue"
 import OptionsOverlay from "./_OptionsOverlay.vue"
+import BannedHero from "./_BannedHero.vue"
 
 
 defineProps({
@@ -61,10 +62,8 @@ defineEmits(['edit', 'delete']);
       <div class="flex-grow"></div>
       <!-- HERO BANS -->
       <div class="flex flex-row gap-2 z-20">
-        <img :src="team1Ban.thumbnail" :alt="team1Ban"
-          class="h-12 z-20 relative rounded-lg border-2 border-red-500 saturate-40" />
-        <img :src="team2Ban.thumbnail" :alt="team2Ban"
-          class="h-12 z-20 relative rounded-lg border-2 border-red-500 saturate-40" />
+        <BannedHero :hero="team1Ban" />
+        <BannedHero :hero="team2Ban" />
       </div>
 
       <Score :team1Score="team1Score" :team2Score="team2Score" :winningTeam="winningTeam" />
