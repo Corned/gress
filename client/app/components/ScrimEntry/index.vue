@@ -14,11 +14,11 @@ defineProps({
     required: true,
   },
   team1Ban: {
-    type: String,
+    type: Object,
     required: true,
   },
   team2Ban: {
-    type: String,
+    type: Object,
     required: true,
   },
   team1Score: {
