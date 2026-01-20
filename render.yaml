@@ -1,0 +1,14 @@
+services:
+  # Monolithic Go Service (Native Environment)
+  - type: web
+    name: gress-monolith
+    env: go
+    rootDir: .
+    buildCommand: chmod +x deploy.sh && ./deploy.sh
+    startCommand: ./server/app
+    envVars:
+      - key: PORT
+        sync: false
+      - key: MONGODB_URI
+        sync: false
+    plan: free
