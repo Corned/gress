@@ -1,8 +1,8 @@
 <template>
-  <section class="w-full">
-    <div class="flex flex-col gap-10">
-      <h1 class="text-7xl font-bold">gress</h1>
-      <p class="text-lg text-gray-600">
+  <section class="w-full h-full flex flex-col justify-center">
+    <div class="flex flex-col gap-10 mb-20">
+      <h1 class="text-7xl font-bold text-[#0d1019] text-center mt-20">gress</h1>
+      <p class="text-lg text-gray-600 text-center">
         Built to track Overwatch rankings and scrimmage results.
       </p>
 
