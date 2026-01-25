@@ -21,6 +21,6 @@ func main() {
 	// db.Create(client)
 
 	r := router.Setup()
-
+	log.Println("Server running on port " + os.Getenv("PORT"))
 	r.Run(":" + os.Getenv("PORT"))
 }
