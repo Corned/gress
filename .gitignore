@@ -26,3 +26,4 @@ logs
 
 # Server stuff
 server/public
+server/app
