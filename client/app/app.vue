@@ -19,6 +19,6 @@ console.log({ appConfig });
       <img src="/assets/icon.png" alt="icon" class="h-full aspect-square rounded" />
     </nav> -->
 
-    <NuxtPage class="max-w-2xl mx-auto" />
+    <NuxtPage />
   </div>
 </template>

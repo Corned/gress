@@ -3,9 +3,16 @@
 @import "@nuxt/ui";
 
 
+@font-face {
+  font-family: "GoogleSans";
+  src: url("@/assets/fonts/GoogleSans-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
 * {
   box-sizing: border-box;
-  font-family: "Rubik", "Inter";
+  font-family: "GoogleSans", "Inter";
 }
 
 .transparent {
@@ -23,8 +30,11 @@ html,
 body,
 #root {
   height: 100%;
-  background-color: #f7f9fb;
   position: relative;
+}
+
+body {
+  background-color: #f3f4f6;
 }
 
 .bg--gradient {
