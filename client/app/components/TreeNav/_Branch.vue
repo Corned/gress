@@ -1,10 +1,14 @@
 <script setup>
-import Leaf from './Leaf.vue'
+import Leaf from './_Leaf.vue'
+import Branch from './_Branch.vue'
 
 const props = defineProps({
   label: String,
   disabled: Boolean,
-  children: Array
+  children: {
+    type: Array,
+    default: () => []
+  }
 })
 
 const isOpen = ref(false)

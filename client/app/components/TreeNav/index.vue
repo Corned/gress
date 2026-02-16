@@ -1,7 +1,7 @@
 <script setup>
 
-import Branch from './Branch.vue'
-import Leaf from './Leaf.vue'
+import Branch from './_Branch.vue'
+import Leaf from './_Leaf.vue'
 
 const props = defineProps({
 
