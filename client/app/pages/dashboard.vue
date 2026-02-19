@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import { heroData } from '~/lib/heroData';
 </script>
 
 <template>
@@ -27,13 +27,26 @@
       </footer>
     </aside>
 
-    <main class="col-span-1 row-span-2 bg-white rounded-tl-xl px-6 pt-10">
-      <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
+    <main class="col-span-1 row-span-2 bg-white rounded-tl-xl p-6">
+
+      <h1 class="text-3xl font-bold mb-4">MRG Garnet</h1>
+      <div id="team__players" class="flex flex-row gap-2 h-10 mb-2">
+        <HeroLabelButton label="Poke" hero="Reinhardt" />
+        <HeroLabelButton label="Tempo" hero="Sojourn" />
+        <HeroLabelButton label="Ceisses" hero="Tracer" />
+        <HeroLabelButton label="Kritzkrieg" hero="Kiriko" />
+        <HeroLabelButton label="KittenLover67" hero="Mercy" />
+      </div>
+      <div id="team__staff" class="flex flex-row gap-2 h-10 mb-8">
+        <HeroLabelButton label="MoodyRat" hero="Ana" />
+        <HeroLabelButton label="Dumda" hero="WreckingBall" />
+      </div>
+
       <h2 class="text-2xl font-semibold mb-4">Your recent matches</h2>
 
       <div class="flex flex-row gap-2">
 
-
+        <RecentMatch />
         <RecentMatch />
         <RecentMatch />
 

@@ -52,7 +52,7 @@ const testData: Match[] = [
 </script>
 
 <template>
-  <div class="p-2 bg-gray-100 rounded-lg w-fit flex flex-col gap-[4px]">
+  <div class="p-2 bg-gray-100 rounded-xl w-fit flex flex-col gap-[4px]">
 
     <p class="text-lg font-bold">MRG Garnet vs xxx</p>
 
