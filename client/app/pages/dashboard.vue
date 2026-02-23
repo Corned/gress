@@ -8,7 +8,7 @@ import { heroData } from '~/lib/heroData';
       <p class="text-3xl font-bold">gress</p>
     </header>
     <nav class="w-full h-full flex items-center justify-between py-4 pr-4">
-      <input class="w-96 h-full rounded-xl bg-gray-200 px-6" placeholder="Search..." />
+      <input class="w-96 h-full rounded-xl bg-zinc-200 px-6" placeholder="Search..." />
       <div class="flex items-center h-full gap-4">
         <p class="text-lg font-semibold">Tempo#XXXXX</p>
         <img src="/assets/icon.png" alt="icon" class="h-full rounded" />
@@ -17,19 +17,19 @@ import { heroData } from '~/lib/heroData';
 
     <aside class="col-span-1 flex flex-col gap-3 px-4">
       <button
-        class="w-full h-12 rounded-md text-lg bg-gray-200 px-6 font-bold cursor-pointer hover:bg-gray-300 transition-colors duration-100">Dashboard</button>
+        class="w-full h-12 rounded-md text-lg bg-zinc-200 px-6 font-bold cursor-pointer hover:bg-zinc-300 transition-colors duration-100">Dashboard</button>
 
-      <!--<input class="w-full rounded-md bg-gray-200 px-3 py-1" placeholder="filter" />-->
+      <!--<input class="w-full rounded-md bg-zinc-200 px-3 py-1" placeholder="filter" />-->
       <TreeNav />
 
       <footer class="w-full mt-auto flex justify-center items-center p-2">
-        <p class="text-center text-sm font-semibold text-gray-400">made with spite and hatred</p>
+        <p class="text-center text-sm font-semibold text-zinc-400">made with spite and hatred</p>
       </footer>
     </aside>
 
     <main class="col-span-1 row-span-2 bg-white rounded-tl-xl p-6">
 
-      <h1 class="text-3xl font-bold mb-4">MRG Garnet</h1>
+      <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
       <div id="team__players" class="flex flex-row gap-2 h-10 mb-2">
         <HeroLabelButton label="Poke" hero="Reinhardt" />
         <HeroLabelButton label="Tempo" hero="Sojourn" />

@@ -52,18 +52,17 @@ const testData: Match[] = [
 </script>
 
 <template>
-  <div class="p-2 bg-gray-100 rounded-xl w-fit flex flex-col gap-[4px]">
+  <div class="p-2 border-2 border-zinc-200/75 rounded-lg w-fit flex flex-col gap-2 !w-[350px]">
 
-    <p class="text-lg font-bold">MRG Garnet vs xxx</p>
-
-    <div v-for="(match, index) in testData" :key="index"
-      class="grid grid-cols-[auto_1fr_auto] gap-3 items-center rounded-sm bg-white p-2 pr-4" :class="{
+    <div v-for="(match, index) in testData" :key="index" class="grid grid-cols-[60px_auto_1fr_50px] gap-2 items-center"
+      :class="{
         'rounded-t-lg': index === 0,
         'rounded-b-lg': index === testData.length - 1,
       }">
-      <img :src="mapData[match.map].thumbnail" alt="map" class="aspect-[2/1] object-cover h-8 rounded" />
+      <img :src="mapData[match.map].thumbnail" alt="map" class="aspect-[2/1] object-cover h-8 rounded " />
       <p class="text-lg font-semibold">{{ mapData[match.map].displayName }}</p>
-      <p class="text-lg font-semibold ml-4">{{ match.team1Score }} - {{ match.team2Score }}</p>
+      <div class="w-[100%] h-2 rounded-full bg-zinc-200/75 flex-1 ml-1"></div>
+      <p class="text-lg font-semibold text-center">{{ match.team1Score }} - {{ match.team2Score }}</p>
     </div>
 
   </div>
