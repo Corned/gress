@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { heroData } from '~/lib/heroData';
+import { Calendar } from 'lucide-vue-next';
+
 </script>
 
 <template>
@@ -27,7 +29,7 @@ import { heroData } from '~/lib/heroData';
       </footer>
     </aside>
 
-    <main class="col-span-1 row-span-2 bg-white rounded-tl-xl p-6">
+    <main class="col-span-1 row-span-2 bg-zinc-50 rounded-tl-xl p-6 border-2 border-zinc-200/75">
 
       <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
       <div id="team__players" class="flex flex-row gap-2 h-10 mb-2">
@@ -35,7 +37,7 @@ import { heroData } from '~/lib/heroData';
         <HeroLabelButton label="Tempo" hero="Sojourn" />
         <HeroLabelButton label="Ceisses" hero="Tracer" />
         <HeroLabelButton label="Kritzkrieg" hero="Kiriko" />
-        <HeroLabelButton label="KittenLover67" hero="Mercy" />
+        <HeroLabelButton label="Ruby" hero="Lucio" />
       </div>
       <div id="team__staff" class="flex flex-row gap-2 h-10 mb-8">
         <HeroLabelButton label="MoodyRat" hero="Ana" />
@@ -43,6 +45,12 @@ import { heroData } from '~/lib/heroData';
       </div>
 
       <h2 class="text-2xl font-semibold mb-4">Your recent matches</h2>
+
+      <div class="flex flex-row gap-2 mb-2">
+        <IconLabelButton label="This week" :icon="Calendar" />
+        <IconLabelButton label="This month" :icon="Calendar" />
+        <IconLabelButton label="This year" :icon="Calendar" />
+      </div>
 
       <div class="flex flex-row gap-2">
 

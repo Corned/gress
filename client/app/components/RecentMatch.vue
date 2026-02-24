@@ -48,17 +48,20 @@ const testData: Match[] = [
     team1Score: 3,
     team2Score: 2,
   },
+  {
+    map: "CircuitRoyal",
+    team1Ban: "Freja",
+    team2Ban: "Sigma",
+    team1Score: 2,
+    team2Score: 3,
+  },
 ];
 </script>
 
 <template>
-  <div class="p-2 border-2 border-zinc-200/75 rounded-lg w-fit flex flex-col gap-2 !w-[350px]">
+  <div class="p-2 bg-white border-2 border-zinc-200/75 rounded-md w-fit flex flex-col gap-2 !w-[350px]">
 
-    <div v-for="(match, index) in testData" :key="index" class="grid grid-cols-[60px_auto_1fr_50px] gap-2 items-center"
-      :class="{
-        'rounded-t-lg': index === 0,
-        'rounded-b-lg': index === testData.length - 1,
-      }">
+    <div v-for="(match, index) in testData" :key="index" class="grid grid-cols-[60px_auto_1fr_50px] gap-2 items-center">
       <img :src="mapData[match.map].thumbnail" alt="map" class="aspect-[2/1] object-cover h-8 rounded " />
       <p class="text-lg font-semibold">{{ mapData[match.map].displayName }}</p>
       <div class="w-[100%] h-2 rounded-full bg-zinc-200/75 flex-1 ml-1"></div>
