@@ -1,35 +1,44 @@
 <script setup lang="ts">
 import { heroData } from '~/lib/heroData';
-import { Calendar } from 'lucide-vue-next';
+import { AppleIcon, AwardIcon, Calendar, ChartColumnStackedIcon, CrossIcon, SwordsIcon, ThumbsDownIcon } from 'lucide-vue-next';
+import MatchOverview from '~/components/MatchOverview.vue';
 
 </script>
 
 <template>
   <section id="page-container" class="w-full h-full grid grid-cols-[250px_auto] grid-rows-[80px_1fr]">
-    <header class="self-center w-full px-4">
+    <header class="bg-zinc-50 grid grid-cols-[1fr_auto_1fr] items-center">
+      <p class="text-3xl font-bold text-zinc-300 justify-self-end select-none">pro</p>
       <p class="text-3xl font-bold">gress</p>
+
     </header>
-    <nav class="w-full h-full flex items-center justify-between py-4 pr-4">
-      <input class="w-96 h-full rounded-xl bg-zinc-200 px-6" placeholder="Search..." />
-      <div class="flex items-center h-full gap-4">
+    <nav class="w-full h-full flex items-center justify-between py-4 pr-4 bg-zinc-50">
+      <div class="flex items-center h-full gap-4 ml-auto">
         <p class="text-lg font-semibold">Tempo#XXXXX</p>
         <img src="/assets/icon.png" alt="icon" class="h-full rounded" />
       </div>
     </nav>
+    <aside class="flex flex-col gap-3 px-4 bg-zinc-50">
 
-    <aside class="col-span-1 flex flex-col gap-3 px-4">
       <button
-        class="w-full h-12 rounded-md text-lg bg-zinc-200 px-6 font-bold cursor-pointer hover:bg-zinc-300 transition-colors duration-100">Dashboard</button>
+        class="w-full h-12 rounded-md text-lg bg-zinc-200/75 px-6 font-bold cursor-pointer hover:bg-zinc-300 transition-colors duration-100">Dashboard</button>
+      <button
+        class="w-full h-12 rounded-md text-lg bg-zinc-200/75 px-6 font-bold cursor-pointer hover:bg-zinc-300 transition-colors duration-100">Manage
+        Team</button>
+      <button
+        class="w-full h-12 rounded-md text-lg bg-zinc-200/75 px-6 font-bold cursor-pointer hover:bg-zinc-300 transition-colors duration-100">Matches</button>
 
       <!--<input class="w-full rounded-md bg-zinc-200 px-3 py-1" placeholder="filter" />-->
-      <TreeNav />
+      <!--<TreeNav />-->
 
       <footer class="w-full mt-auto flex justify-center items-center p-2">
         <p class="text-center text-sm font-semibold text-zinc-400">made with spite and hatred</p>
       </footer>
     </aside>
 
-    <main class="col-span-1 row-span-2 bg-zinc-50 rounded-tl-xl p-6 border-2 border-zinc-200/75">
+
+
+    <main class="col-span-1 row-span-2 bg-zinc-100 p-6 rounded-tl-md border-t-2 border-l-2 border-zinc-200/75">
 
       <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
       <div id="team__players" class="flex flex-row gap-2 h-10 mb-2">
@@ -44,21 +53,24 @@ import { Calendar } from 'lucide-vue-next';
         <HeroLabelButton label="Dumda" hero="WreckingBall" />
       </div>
 
-      <h2 class="text-2xl font-semibold mb-4">Your recent matches</h2>
+      <h2 class="text-2xl font-semibold mb-4">Recent matches</h2>
 
-      <div class="flex flex-row gap-2 mb-2">
-        <IconLabelButton label="This week" :icon="Calendar" />
-        <IconLabelButton label="This month" :icon="Calendar" />
-        <IconLabelButton label="This year" :icon="Calendar" />
+      <!--  -->
+
+      <div class="mb-2">
+        <div class="flex flex-row gap-2 mb-2 items-center">
+          <IconLabelButton label="Simple" :icon="AppleIcon" />
+          <IconLabelButton label="Detailed" :icon="ChartColumnStackedIcon" />
+          <div class="w-px h-6 bg-zinc-200 hidden"></div>
+        </div>
+
+        <div class="flex flex-row gap-2">
+          <MatchOverview />
+          <MatchOverview />
+          <MatchOverview />
+        </div>
       </div>
 
-      <div class="flex flex-row gap-2">
-
-        <RecentMatch />
-        <RecentMatch />
-        <RecentMatch />
-
-      </div>
     </main>
   </section>
 </template>
