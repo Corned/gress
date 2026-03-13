@@ -6,7 +6,7 @@ export interface IMapData {
 }
 
 export type MapData = typeof mapData;
-export type MapType = "Control" | "Escort" | "Hybrid" | "Push" | "Flashpoint";
+export type MapType = "Control" | "Escort" | "Hybrid" | "Push" | "Flashpoint" | "Clash";
 
 export const mapTypeIcons: Record<MapType, string> = {
   Control: "/assets/images/maps/Control.webp",
@@ -14,6 +14,7 @@ export const mapTypeIcons: Record<MapType, string> = {
   Hybrid: "/assets/images/maps/Hybrid.webp",
   Push: "/assets/images/maps/Push.webp",
   Flashpoint: "/assets/images/maps/Flashpoint.webp",
+  Clash: "/assets/images/maps/Clash.webp",
 };
 
 export const mapData = {
@@ -50,7 +51,7 @@ export const mapData = {
   Oasis: {
     name: "Oasis",
     thumbnail: "/assets/images/maps/oasis.webp",
-    type: "Control" as MapType as MapType,
+    type: "Control" as MapType,
     displayName: "Oasis",
   },
   Samoa: {

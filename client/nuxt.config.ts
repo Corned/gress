@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     "@nuxt/content",
     "@nuxt/image",
     "@nuxt/scripts",
-    "@nuxt/test-utils",
     "@nuxt/ui",
   ],
 });
