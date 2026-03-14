@@ -81,11 +81,7 @@ const testData: Match[] = [
         <img :src="mapData[match.map].thumbnail" alt="map" class="aspect-2/1 object-cover h-8 rounded " />
         <p class="text-lg font-semibold">{{ mapData[match.map].displayName }}</p>
         <div class="w-full h-2 rounded-full bg-zinc-200/75 flex-1"></div>
-        <div class="grid grid-cols-[16px_1fr_16px] gap-1">
-          <p class="text-lg font-semibold text-center">{{ match.team1Score }}</p>
-          <p class="text-lg font-semibold text-center">-</p>
-          <p class="text-lg font-semibold text-center">{{ match.team2Score }}</p>
-        </div>
+        <p class="text-lg font-semibold tabular-nums">{{ match.team1Score }} &ndash; {{ match.team2Score }}</p>
       </div>
     </div>
 
