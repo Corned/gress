@@ -7,9 +7,8 @@ import MatchOverview from '~/components/MatchOverview.vue';
 
 <template>
   <section id="page-container" class="w-full h-full grid grid-cols-[250px_auto] grid-rows-[80px_1fr]">
-    <header class="bg-zinc-50 grid grid-cols-[1fr_auto_1fr] items-center">
-      <p class="text-3xl font-bold text-zinc-300 justify-self-end select-none">pro</p>
-      <p class="text-3xl font-bold">gress</p>
+    <header class="grid place-items-center">
+      <AppLogo class="select-none" size="text-[2rem]" />
 
     </header>
     <nav class="w-full h-full flex items-center justify-between py-4 pr-4 bg-zinc-50">
@@ -20,13 +19,9 @@ import MatchOverview from '~/components/MatchOverview.vue';
     </nav>
     <aside class="flex flex-col gap-3 px-4 bg-zinc-50">
 
-      <button
-        class="w-full h-12 rounded-md text-lg bg-zinc-200/75 px-6 font-bold cursor-pointer hover:bg-zinc-300 transition-colors duration-100">Dashboard</button>
-      <button
-        class="w-full h-12 rounded-md text-lg bg-zinc-200/75 px-6 font-bold cursor-pointer hover:bg-zinc-300 transition-colors duration-100">Manage
-        Team</button>
-      <button
-        class="w-full h-12 rounded-md text-lg bg-zinc-200/75 px-6 font-bold cursor-pointer hover:bg-zinc-300 transition-colors duration-100">Matches</button>
+      <AppButton label="Dashboard" />
+      <AppButton label="Manage Team" />
+      <AppButton label="Matches" />
 
       <!--<input class="w-full rounded-md bg-zinc-200 px-3 py-1" placeholder="filter" />-->
       <!--<TreeNav />-->
