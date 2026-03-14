@@ -12,22 +12,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          bg: '#f3f4f6',             // Original generic App background
-          surface: colors.white,     // Card/Container background
-          border: colors.gray[200],  // Borders
-          muted: colors.gray[200],   // Original bg-gray-200
+        surface: {
+          page:   colors.white,        // Page background
+          base:   colors.zinc[50],     // Sidebar, nav
+          raised: colors.zinc[100],    // Panels, main content
         },
-        content: {
-          title: colors.black,       // Original default black text
-          body: colors.black,        // Original default black text
-          muted: colors.gray[400],   // Original text-gray-400
+        border: {
+          subtle:  colors.zinc[200],   // Dividers, subtle outlines
+          default: colors.zinc[300],   // Standard borders
         },
-        accent: {
-          DEFAULT: colors.indigo[500], // Primary highlight
-          hover: colors.indigo[600],   // Hover highlight
-          light: colors.indigo[50],    // Soft background highlight
-        }
+        ink: {
+          muted:     colors.zinc[400], // Captions, footnotes
+          secondary: colors.zinc[500], // Secondary labels
+          body:      colors.zinc[600], // Body copy, descriptions
+          primary:   colors.zinc[900], // Headings, labels
+          heading:   colors.zinc[950], // Logo, prominent headings, action bg
+        },
       }
     },
   },

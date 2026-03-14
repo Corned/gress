@@ -6,18 +6,18 @@ import MatchOverview from '~/components/MatchOverview.vue';
 </script>
 
 <template>
-  <section id="page-container" class="w-full h-full grid grid-cols-[250px_auto] grid-rows-[80px_1fr]">
+  <section id="page-container" class="w-full h-full grid grid-cols-[250px_auto] grid-rows-[80px_1fr] bg-zinc-100">
     <header class="grid place-items-center">
       <AppLogo class="select-none" size="text-[2rem]" />
 
     </header>
-    <nav class="w-full h-full flex items-center justify-between py-4 pr-4 bg-zinc-50">
+    <nav class="w-full h-full flex items-center justify-between py-4 pr-4 ">
       <div class="flex items-center h-full gap-4 ml-auto">
         <p class="text-lg font-semibold">Tempo#XXXXX</p>
         <img src="/assets/icon.png" alt="icon" class="h-full rounded" />
       </div>
     </nav>
-    <aside class="flex flex-col gap-3 px-4 bg-zinc-50">
+    <aside class="flex flex-col gap-3 px-4">
 
       <AppButton label="Dashboard" />
       <AppButton label="Manage Team" />
@@ -33,7 +33,7 @@ import MatchOverview from '~/components/MatchOverview.vue';
 
 
 
-    <main class="col-span-1 row-span-2 bg-zinc-100 p-6 rounded-tl-md border-t-2 border-l-2 border-zinc-200">
+    <main class="col-span-1 row-span-2 bg-white p-6 rounded-tl-2xl  border-zinc-200">
 
       <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
       <div id="team__players" class="flex flex-row gap-2 h-10 mb-2">

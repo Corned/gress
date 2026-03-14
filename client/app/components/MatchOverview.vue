@@ -60,9 +60,9 @@ const testData: Match[] = [
 </script>
 
 <template>
-  <div class=" bg-white border-2 border-zinc-200/75 rounded-md w-fit !w-[350px]">
+  <div class=" bg-white border border-zinc-300 rounded-md w-[350px]">
 
-    <div class="relative flex flex-col gap-0 items-center justify-between border-b-2 border-zinc-200/75 px-4 py-4">
+    <div class="relative flex flex-col gap-0 items-center justify-between border-b border-zinc-300 px-4 py-4">
       <p class="text-xl font-semibold">MRG Garnet</p>
       <p class="text-md font-semibold text-zinc-500 mt-[-4px]">San Francisco Shock</p>
       <div class="flex flex-row gap-2 mt-2">
@@ -78,9 +78,9 @@ const testData: Match[] = [
     <div class="p-2 flex flex-col gap-2">
       <div v-for="(match, index) in testData" :key="index"
         class="grid grid-cols-[60px_auto_1fr_auto] gap-2 items-center">
-        <img :src="mapData[match.map].thumbnail" alt="map" class="aspect-[2/1] object-cover h-8 rounded " />
+        <img :src="mapData[match.map].thumbnail" alt="map" class="aspect-2/1 object-cover h-8 rounded " />
         <p class="text-lg font-semibold">{{ mapData[match.map].displayName }}</p>
-        <div class="w-[100%] h-2 rounded-full bg-zinc-200/75 flex-1"></div>
+        <div class="w-full h-2 rounded-full bg-zinc-200/75 flex-1"></div>
         <div class="grid grid-cols-[16px_1fr_16px] gap-1">
           <p class="text-lg font-semibold text-center">{{ match.team1Score }}</p>
           <p class="text-lg font-semibold text-center">-</p>

@@ -9,7 +9,7 @@ import { BarChart2, Users, Trophy, Swords, Map, TrendingUp, Shield } from 'lucid
     <div class="flex flex-col items-center gap-5 text-center w-full max-w-2xl">
       <AppLogo size="text-[6rem]" />
 
-      <p class="text-xl text-zinc-600 leading-relaxed font-medium">
+      <p class="text-xl text-zinc-500 leading-relaxed font-medium">
         The scrim tracker built for Overwatch 2.
       </p>
 
@@ -23,7 +23,7 @@ import { BarChart2, Users, Trophy, Swords, Map, TrendingUp, Shield } from 'lucid
 
       <!-- Auth buttons -->
       <div class="flex items-center justify-center gap-2 w-full max-w-lg mt-2">
-        <NavButton label="Login with Battle.net" bg="bg-[#009ae7]" textColor="text-white" to="/dashboard" />
+        <NavButton label="Login with Battle.net" bg="bg-zinc-950" textColor="text-white" to="/dashboard" />
       </div>
     </div>
 
