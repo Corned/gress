@@ -33,7 +33,7 @@ import MatchOverview from '~/components/MatchOverview.vue';
 
 
 
-    <main class="col-span-1 row-span-2 bg-zinc-100 p-6 rounded-tl-md border-t-2 border-l-2 border-zinc-200/75">
+    <main class="col-span-1 row-span-2 bg-zinc-100 p-6 rounded-tl-md border-t-2 border-l-2 border-zinc-200">
 
       <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
       <div id="team__players" class="flex flex-row gap-2 h-10 mb-2">
