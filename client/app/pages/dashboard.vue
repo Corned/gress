@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { heroData } from '~/lib/heroData';
-import { AppleIcon, AwardIcon, Calendar, ChartColumnStackedIcon, CrossIcon, SwordsIcon, ThumbsDownIcon } from 'lucide-vue-next';
+import { AppleIcon, UserIcon, AwardIcon, Calendar, ChartColumnStackedIcon, CrossIcon, SwordsIcon, ThumbsDownIcon, LayoutDashboardIcon, UsersIcon, TrophyIcon, BarChart2Icon, ClockIcon, SettingsIcon, Sword, Sidebar } from 'lucide-vue-next';
 import MatchOverview from '~/components/MatchOverview.vue';
 
 </script>
@@ -17,11 +17,21 @@ import MatchOverview from '~/components/MatchOverview.vue';
         <img src="/assets/icon.png" alt="icon" class="h-full rounded" />
       </div>
     </nav>
-    <aside class="flex flex-col gap-3 px-4">
+    <aside class="flex flex-col gap-4 px-2">
 
-      <AppButton label="Dashboard" />
-      <AppButton label="Manage Team" />
-      <AppButton label="Matches" />
+      <div class="flex flex-col">
+        <SidebarButton label="Dashboard" :icon="LayoutDashboardIcon" />
+        <SidebarButton label="Teams" :icon="UsersIcon" />
+        <SidebarButton label="Matches" :icon="SwordsIcon" />
+        <SidebarButton label="Rankings" :icon="TrophyIcon" />
+        <SidebarButton label="Stats" :icon="BarChart2Icon" />
+        <SidebarButton label="History" :icon="ClockIcon" />
+      </div>
+
+      <div class="flex flex-col">
+        <SidebarButton label="Profile" :icon="UserIcon" />
+        <SidebarButton label="Settings" :icon="SettingsIcon" />
+      </div>
 
       <!--<input class="w-full rounded-md bg-zinc-200 px-3 py-1" placeholder="filter" />-->
       <!--<TreeNav />-->
