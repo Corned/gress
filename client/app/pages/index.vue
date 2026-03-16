@@ -23,7 +23,7 @@ import { BarChart2, Users, Trophy, Swords, Map, TrendingUp, Shield } from 'lucid
 
       <!-- Auth buttons -->
       <div class="flex items-center justify-center gap-2 w-full max-w-lg mt-2">
-        <NavButton label="Login with Battle.net" bg="bg-zinc-950" textColor="text-white" to="/app" />
+        <NavButton label="Login with Battle.net" bg="bg-zinc-950" textColor="text-white" to="/app/dashboard" />
       </div>
     </div>
 

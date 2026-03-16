@@ -9,6 +9,7 @@ import { LayoutDashboardIcon, UsersIcon, SwordsIcon, TrophyIcon, BarChart2Icon, 
     </header>
 
     <nav class="w-full h-full flex items-center justify-between py-4 pr-4">
+      <slot name="breadcrumb" />
       <div class="flex items-center h-full gap-4 ml-auto">
         <p class="text-lg font-semibold">Tempo#XXXXX</p>
         <img src="/assets/icon.png" alt="icon" class="h-full rounded" />
@@ -17,7 +18,7 @@ import { LayoutDashboardIcon, UsersIcon, SwordsIcon, TrophyIcon, BarChart2Icon, 
 
     <aside class="flex flex-col gap-4 px-2">
       <div class="flex flex-col gap-px">
-        <SidebarButton label="Dashboard" :icon="LayoutDashboardIcon" to="/app" />
+        <SidebarButton label="Dashboard" :icon="LayoutDashboardIcon" to="/app/dashboard" />
         <SidebarButton label="Teams" :icon="UsersIcon" to="/app/teams" />
         <SidebarButton label="Matches" :icon="SwordsIcon" to="/app/matches" />
         <SidebarButton label="Rankings" :icon="TrophyIcon" to="/app/rankings" />
