@@ -60,9 +60,9 @@ const testData: Match[] = [
 </script>
 
 <template>
-  <div class=" bg-white border border-zinc-300 rounded-md w-[350px]">
+  <div class=" bg-white border border-zinc-200 rounded-md w-[350px]">
 
-    <div class="relative flex flex-col gap-0 items-center justify-between border-b border-zinc-300 px-4 py-4">
+    <div class="relative flex flex-col gap-0 items-center justify-between border-b border-zinc-200 px-4 py-4">
       <p class="text-xl font-semibold">MRG Garnet</p>
       <p class="text-md font-semibold text-zinc-500 mt-[-4px]">San Francisco Shock</p>
       <div class="flex flex-row gap-2 mt-2">

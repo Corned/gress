@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { LayoutDashboardIcon, UsersIcon, SwordsIcon, TrophyIcon, BarChart2Icon, ClockIcon, UserIcon, SettingsIcon } from 'lucide-vue-next';
+import {
+  LayoutDashboardIcon,
+  UsersIcon,
+  SwordsIcon,
+  TrophyIcon,
+  BarChart2Icon,
+  ClockIcon,
+  UserIcon,
+  SettingsIcon,
+} from "lucide-vue-next";
 </script>
 
 <template>
@@ -16,8 +25,8 @@ import { LayoutDashboardIcon, UsersIcon, SwordsIcon, TrophyIcon, BarChart2Icon, 
       </div>
     </nav>
 
-    <aside class="flex flex-col gap-4 px-2">
-      <div class="flex flex-col gap-px">
+    <aside class="flex flex-col px-2">
+      <div class="flex flex-col gap-px mb-4">
         <SidebarButton label="Dashboard" :icon="LayoutDashboardIcon" to="/app/dashboard" />
         <SidebarButton label="Teams" :icon="UsersIcon" to="/app/teams" />
         <SidebarButton label="Matches" :icon="SwordsIcon" to="/app/matches" />
@@ -36,7 +45,7 @@ import { LayoutDashboardIcon, UsersIcon, SwordsIcon, TrophyIcon, BarChart2Icon, 
       </footer>
     </aside>
 
-    <main class="col-span-1 row-span-2 bg-white p-6 rounded-tl-2xl border-zinc-200">
+    <main class="col-span-1 row-span-2 bg-white p-6 rounded-tl-2xl border-zinc-200 pt-10">
       <slot />
     </main>
   </section>

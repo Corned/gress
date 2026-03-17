@@ -4,7 +4,7 @@ const form = defineModel({ required: false })
 
 <template>
   <div
-    class="bg-gray-50 p-3 rounded-lg shadow-sm border border-gray-200 flex flex-wrap gap-4 items-end justify-between w-full max-w-5xl sticky top-4 z-40">
+    class="bg-gray-50 p-3 rounded-lg shadow-sm border border-zinc-200 flex flex-wrap gap-4 items-end justify-between w-full max-w-5xl sticky top-4 z-40">
 
     <div class="flex items-end gap-3 flex-grow">
       <div class="flex flex-col gap-1 flex-1 min-w-[140px]">
