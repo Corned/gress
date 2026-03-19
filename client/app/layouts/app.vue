@@ -1,52 +1,75 @@
 <script setup lang="ts">
-import {
-  LayoutDashboardIcon,
-  UsersIcon,
-  SwordsIcon,
-  TrophyIcon,
-  BarChart2Icon,
-  ClockIcon,
-  UserIcon,
-  SettingsIcon,
-} from "lucide-vue-next";
+const mainNavItems = [
+  { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', to: '/app/dashboard' },
+  { label: 'My Teams', icon: 'i-lucide-users-round', to: '/app/teams' },
+]
+
+const teams = [
+  { label: 'MRG Garnet', slug: 'mrg-garnet', badge: 'GM5' },
+  { label: 'MRG Agate', slug: 'mrg-agate', badge: 'GM5' },
+]
+
+const bottomNavItems = [
+  [
+    { label: 'Profile', icon: 'i-lucide-user', to: '/app/profile' },
+    { label: 'Settings', icon: 'i-lucide-settings', to: '/app/settings' },
+  ],
+]
 </script>
 
 <template>
-  <section id="page-container" class="w-full h-full grid grid-cols-[250px_auto] grid-rows-[80px_1fr] bg-zinc-100">
-    <header class="grid place-items-center">
-      <AppLogo class="select-none" size="text-[2rem]" />
-    </header>
+  <UDashboardGroup>
+    <UDashboardSidebar class="w-64" :ui="{ header: 'px-2 h-24', body: 'px-2 flex flex-col gap-4', footer: 'px-2' }">
+      <template #header>
+        <div class="w-full grid place-items-center">
+          <AppLogo class="" size="text-[2rem]" />
+        </div>
+      </template>
 
-    <nav class="w-full h-full flex items-center justify-between py-4 pr-4">
-      <slot name="breadcrumb" />
-      <div class="flex items-center h-full gap-4 ml-auto">
-        <p class="text-lg font-semibold">Tempo#XXXXX</p>
-        <img src="/assets/icon.png" alt="icon" class="h-full rounded" />
-      </div>
-    </nav>
+      <UNavigationMenu orientation="vertical" variant="pill" color="neutral" :items="[mainNavItems]"
+        :ui="{ linkLabel: 'font-semibold', childLinkLabel: 'font-semibold' }" />
 
-    <aside class="flex flex-col px-2">
-      <div class="flex flex-col gap-px mb-4">
-        <SidebarButton label="Dashboard" :icon="LayoutDashboardIcon" to="/app/dashboard" />
-        <SidebarButton label="Teams" :icon="UsersIcon" to="/app/teams" />
-        <SidebarButton label="Matches" :icon="SwordsIcon" to="/app/matches" />
-        <SidebarButton label="Rankings" :icon="TrophyIcon" to="/app/rankings" />
-        <SidebarButton label="Stats" :icon="BarChart2Icon" to="/app/stats" />
-        <SidebarButton label="History" :icon="ClockIcon" to="/app/history" />
-      </div>
-
-      <div class="flex flex-col gap-px">
-        <SidebarButton label="Profile" :icon="UserIcon" to="/app/profile" />
-        <SidebarButton label="Settings" :icon="SettingsIcon" to="/app/settings" />
+      <div class="flex flex-col gap-0.5">
+        <p class="px-2 text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1">Teams</p>
+        <NuxtLink v-for="team in teams" :key="team.slug" :to="`/app/teams/${team.slug}`"
+          class="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-zinc-100 transition-colors"
+          active-class="bg-zinc-100">
+          <div class="w-7 h-7 rounded-md bg-zinc-200 flex items-center justify-center shrink-0">
+            <span class="text-xs font-bold text-zinc-700">{{ team.label.charAt(0) }}</span>
+          </div>
+          <span class="text-sm font-semibold text-zinc-700 truncate flex-1">{{ team.label }}</span>
+          <span class="text-xs font-semibold text-zinc-400 tabular-nums">{{ team.badge }}</span>
+        </NuxtLink>
       </div>
 
-      <footer class="w-full mt-auto flex justify-center items-center p-2">
-        <p class="text-center text-sm font-semibold text-zinc-400">made with spite and hatred</p>
-      </footer>
-    </aside>
+      <div class="mt-auto">
+        <UNavigationMenu orientation="vertical" variant="pill" color="neutral" :items="bottomNavItems"
+          :ui="{ linkLabel: 'font-semibold', childLinkLabel: 'font-semibold' }" />
+      </div>
 
-    <main class="col-span-1 row-span-2 bg-white p-6 rounded-tl-2xl border-zinc-200 pt-10">
-      <slot />
-    </main>
-  </section>
+      <template #footer>
+        <div class="w-full rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2.5 flex items-center gap-3">
+          <img src="/assets/icon.png" alt="icon" class="w-8 h-8 rounded-md shrink-0" />
+          <div class="flex flex-col min-w-0">
+            <p class="text-sm font-semibold text-zinc-900 leading-tight truncate">Tempo</p>
+            <p class="text-xs text-zinc-400 leading-tight truncate">#12345</p>
+          </div>
+        </div>
+      </template>
+    </UDashboardSidebar>
+
+    <UDashboardPanel>
+      <template #header>
+        <UDashboardNavbar>
+          <template #left>
+            <slot name="breadcrumb" />
+          </template>
+        </UDashboardNavbar>
+      </template>
+
+      <div class="p-6 pt-10 max-w-3xl">
+        <slot />
+      </div>
+    </UDashboardPanel>
+  </UDashboardGroup>
 </template>
