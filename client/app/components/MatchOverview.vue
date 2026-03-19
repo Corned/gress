@@ -31,7 +31,7 @@ const draws = testData.filter(m => m.team1Score === m.team2Score).length
 
     <div class="flex items-center justify-between px-3 py-2.5 border-b border-zinc-100">
       <div class="min-w-0">
-        <p class="text-sm font-bold text-zinc-900 truncate leading-tight">MRG Garnet</p>
+        <p class="text-sm font-bold truncate leading-tight">MRG Garnet</p>
         <p class="text-sm text-zinc-400 truncate leading-tight">vs San Francisco Shock</p>
       </div>
       <div class="flex gap-1 shrink-0 ml-2">

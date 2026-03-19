@@ -7,7 +7,7 @@ const id = route.params.id
 </script>
 
 <template>
-  <h1 class="text-3xl font-bold text-zinc-900 mb-8">{{ "MRG Garnet" }}</h1>
+  <h1 class="text-3xl font-bold mb-8">{{ "MRG Garnet" }}</h1>
 
   <section class="mb-8">
     <SectionHeader title="Roster" />

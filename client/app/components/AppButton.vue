@@ -7,7 +7,7 @@ interface Props {
 
 withDefaults(defineProps<Props>(), {
   bg: 'bg-zinc-200',
-  textColor: 'text-zinc-900',
+  textColor: '',
 })
 </script>
 

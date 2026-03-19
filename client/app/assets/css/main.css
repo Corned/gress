@@ -35,6 +35,7 @@ body,
 
 body {
   background-color: white;
+  color: theme(--color-zinc-900);
 }
 
 .bg--gradient {

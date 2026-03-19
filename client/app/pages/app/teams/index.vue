@@ -9,8 +9,8 @@ const teams = [
     record: { wins: 18, losses: 5, draws: 2 },
     roster: [
       { name: 'Poke', hero: 'Reinhardt' as keyof typeof heroData, role: 'Tank' },
-      { name: 'Tempo', hero: 'Sojourn' as keyof typeof heroData, role: 'DPS' },
-      { name: 'Ceisses', hero: 'Tracer' as keyof typeof heroData, role: 'DPS' },
+      { name: 'Tempo', hero: 'Sojourn' as keyof typeof heroData, role: 'Damage' },
+      { name: 'Ceisses', hero: 'Tracer' as keyof typeof heroData, role: 'Damage' },
       { name: 'Kritzkrieg', hero: 'Kiriko' as keyof typeof heroData, role: 'Support' },
       { name: 'Ruby', hero: 'Lucio' as keyof typeof heroData, role: 'Support' },
     ],
@@ -21,11 +21,11 @@ const teams = [
     rank: 'GM5',
     record: { wins: 14, losses: 9, draws: 2 },
     roster: [
-      { name: 'Aether', hero: 'Sigma' as keyof typeof heroData, role: 'Tank' },
-      { name: 'Noctis', hero: 'Genji' as keyof typeof heroData, role: 'DPS' },
-      { name: 'Wavefront', hero: 'Sojourn' as keyof typeof heroData, role: 'DPS' },
-      { name: 'Kairos', hero: 'Ana' as keyof typeof heroData, role: 'Support' },
-      { name: 'Zephyr', hero: 'Lucio' as keyof typeof heroData, role: 'Support' },
+      { name: 'Skycommander', hero: 'Sigma' as keyof typeof heroData, role: 'Tank' },
+      { name: '6IQ', hero: 'Genji' as keyof typeof heroData, role: 'Damage' },
+      { name: 'TraynyanCat', hero: 'Sojourn' as keyof typeof heroData, role: 'Damage' },
+      { name: 'Valentin', hero: 'Ana' as keyof typeof heroData, role: 'Support' },
+      { name: 'LFP', hero: 'Lucio' as keyof typeof heroData, role: 'Support' },
     ],
   },
 ]
@@ -35,13 +35,12 @@ const teams = [
   <h1 class="text-3xl font-bold mb-6">My Teams</h1>
 
   <div class="grid grid-cols-[repeat(2,300px)] gap-5">
-    <NuxtLink v-for="team in teams" :key="team.slug" :to="`/app/teams/${team.slug}`"
-      class="rounded-xl border border-zinc-200 hover:border-zinc-300 transition-colors overflow-hidden block">
+    <ClickableCard v-for="team in teams" :key="team.slug" :to="`/app/teams/${team.slug}`" class="overflow-hidden block">
       <div class="px-5 py-4 border-b border-zinc-100 flex items-center justify-between">
         <div>
-          <p class="text-lg font-bold text-zinc-900">{{ team.name }}</p>
+          <p class="text-lg font-bold">{{ team.name }}</p>
           <p class="text-sm text-zinc-400">{{ team.record.wins }}W · {{ team.record.losses }}L · {{ team.record.draws
-            }}D</p>
+          }}D</p>
         </div>
         <span class="text-sm font-bold text-zinc-500 tabular-nums">{{ team.rank }}</span>
       </div>
@@ -57,6 +56,6 @@ const teams = [
           </div>
         </div>
       </div>
-    </NuxtLink>
+    </ClickableCard>
   </div>
 </template>

@@ -5,9 +5,9 @@ import { mapData } from '~/lib/mapData'
 const username = 'Tempo'
 
 const rankedRoles = [
-  { label: 'Tank', sr: 4350, rank: 'Grandmaster 3' },
-  { label: 'Damage', sr: 3990, rank: 'Masters 1' },
-  { label: 'Support', sr: 3750, rank: 'Masters 3' },
+  { label: 'Tank', sr: 3194, rank: 'Diamond 4' },
+  { label: 'Damage', sr: 3605, rank: 'Master 4' },
+  { label: 'Support', sr: 3548, rank: 'Master 5' },
 ]
 
 const rankedHeroes = [
@@ -43,7 +43,7 @@ const scrimMaps = [
 <template>
   <div class="mb-10">
     <p class="text-sm font-semibold text-zinc-400 mb-1">Welcome back</p>
-    <h1 class="text-3xl font-bold text-zinc-900">Hello, {{ username }}!</h1>
+    <h1 class="text-3xl font-bold">Hello, {{ username }}!</h1>
   </div>
 
   <!-- Ranked -->
@@ -53,7 +53,7 @@ const scrimMaps = [
     <div class="grid grid-cols-3 gap-4">
       <div v-for="role in rankedRoles" :key="role.label" class="rounded-xl border border-zinc-200 px-5 py-4">
         <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-1">{{ role.label }}</p>
-        <p class="text-3xl font-bold text-zinc-900 tabular-nums leading-none">{{ role.sr }}</p>
+        <p class="text-3xl font-bold tabular-nums leading-none">{{ role.sr }}</p>
         <p class="text-sm text-zinc-400 mt-1">{{ role.rank }}</p>
       </div>
     </div>
@@ -64,14 +64,14 @@ const scrimMaps = [
     <SectionHeader title="Your Teams" class="mb-5" />
 
     <div class="flex gap-3">
-      <NuxtLink v-for="team in myTeams" :key="team.slug" :to="`/app/teams/${team.slug}`"
-        class="flex items-center gap-3 rounded-xl border border-zinc-200 px-4 py-3 hover:border-zinc-300 transition-colors">
+      <ClickableCard v-for="team in myTeams" :key="team.slug" :to="`/app/teams/${team.slug}`"
+        class="flex items-center gap-3 px-4 py-3">
         <div class="w-7 h-7 rounded-md bg-zinc-200 flex items-center justify-center shrink-0">
           <span class="text-xs font-bold text-zinc-700">{{ team.name.charAt(0) }}</span>
         </div>
-        <span class="text-sm font-semibold text-zinc-900">{{ team.name }}</span>
+        <span class="text-sm font-semibold">{{ team.name }}</span>
         <span class="text-xs font-semibold text-zinc-400 tabular-nums">{{ team.rank }}</span>
-      </NuxtLink>
+      </ClickableCard>
     </div>
   </section>
 
@@ -82,15 +82,15 @@ const scrimMaps = [
     <div class="grid grid-cols-3 gap-4 mb-6">
       <div class="rounded-xl border border-zinc-200 px-5 py-4">
         <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-1">Wins</p>
-        <p class="text-3xl font-bold text-zinc-900 tabular-nums leading-none">{{ scrimRecord.wins }}</p>
+        <p class="text-3xl font-bold tabular-nums leading-none">{{ scrimRecord.wins }}</p>
       </div>
       <div class="rounded-xl border border-zinc-200 px-5 py-4">
         <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-1">Losses</p>
-        <p class="text-3xl font-bold text-zinc-900 tabular-nums leading-none">{{ scrimRecord.losses }}</p>
+        <p class="text-3xl font-bold tabular-nums leading-none">{{ scrimRecord.losses }}</p>
       </div>
       <div class="rounded-xl border border-zinc-200 px-5 py-4">
         <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-1">Draws</p>
-        <p class="text-3xl font-bold text-zinc-900 tabular-nums leading-none">{{ scrimRecord.draws }}</p>
+        <p class="text-3xl font-bold tabular-nums leading-none">{{ scrimRecord.draws }}</p>
       </div>
     </div>
 
@@ -101,10 +101,10 @@ const scrimMaps = [
         <img :src="mapData[entry.map].thumbnail" :alt="mapData[entry.map].displayName"
           class="w-14 h-10 object-cover shrink-0 rounded-md" />
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-zinc-900 truncate">{{ mapData[entry.map].displayName }}</p>
+          <p class="text-sm font-semibold truncate">{{ mapData[entry.map].displayName }}</p>
           <p class="text-xs text-zinc-400">{{ entry.wins }}W – {{ entry.played - entry.wins }}L</p>
         </div>
-        <p class="text-sm font-bold tabular-nums text-zinc-900 shrink-0">
+        <p class="text-sm font-bold tabular-nums shrink-0">
           {{ Math.round(entry.wins / entry.played * 100) }}%
         </p>
       </div>
