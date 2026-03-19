@@ -2,6 +2,7 @@
 const mainNavItems = [
   { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', to: '/app/dashboard' },
   { label: 'My Teams', icon: 'i-lucide-users-round', to: '/app/teams' },
+  { label: 'Manager', icon: 'i-lucide-shield-check', to: '/app/manage' },
 ]
 
 const teams = [
