@@ -1,6 +1,8 @@
 package router
 
 import (
+	"gress-server/handlers"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,6 +12,8 @@ func Setup() *gin.Engine {
 	router.Static("/_nuxt", "./public/_nuxt")
 	router.Static("/assets", "./public/assets")
 	router.StaticFile("/favicon.ico", "./public/favicon.ico")
+
+	router.POST("/api/ocr", handlers.OCR)
 
 	router.GET("/", func(context *gin.Context) {
 		context.File("./public/index.html")
