@@ -7,6 +7,20 @@ SERVER_BINARY = app
 
 .PHONY: all install build clean dev dev-client dev-server help
 
+# Help message to show available commands
+help:
+	@echo "Usage: make [target]"
+	@echo ""
+	@echo "Available Targets:"
+	@echo "  install      Install dependencies for client (bun) and server (go)"
+	@echo "  build        Build client (static generate) and server (Go binary)"
+	@echo "  dev          Run both client and server in development mode"
+	@echo "  dev-client   Run only the Nuxt development server"
+	@echo "  dev-server   Run only the Go development server"
+	@echo "  clean        Remove build artifacts and temporary files"
+	@echo "  help         Display this help message"
+	@echo "  all          Run install and build (default)"
+
 # Default target: Install dependencies and build both projects
 all: install build
 
@@ -41,9 +55,9 @@ dev:
 dev-client:
 	cd $(CLIENT_DIR) && bun run dev
 
-# Run Go development server
+# Run Go development server (with hot reload via Air)
 dev-server:
-	cd $(SERVER_DIR) && go run main.go
+	cd $(SERVER_DIR) && air
 
 # Cleanup build artifacts and generated files
 clean:
@@ -51,17 +65,3 @@ clean:
 	rm -f $(SERVER_DIR)/$(SERVER_BINARY)
 	rm -rf $(SERVER_DIR)/public
 	cd $(CLIENT_DIR) && rm -rf .nuxt .output dist
-
-# Help message to show available commands
-help:
-	@echo "Usage: make [target]"
-	@echo ""
-	@echo "Available Targets:"
-	@echo "  install      Install dependencies for client (bun) and server (go)"
-	@echo "  build        Build client (static generate) and server (Go binary)"
-	@echo "  dev          Run both client and server in development mode"
-	@echo "  dev-client   Run only the Nuxt development server"
-	@echo "  dev-server   Run only the Go development server"
-	@echo "  clean        Remove build artifacts and temporary files"
-	@echo "  help         Display this help message"
-	@echo "  all          Run install and build (default)"
