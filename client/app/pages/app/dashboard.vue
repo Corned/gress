@@ -73,30 +73,31 @@ const scrimMaps = [
   </section>
 
   <!-- Scrims -->
-  <section>
-    <SectionHeader title="Scrims" class="mb-5" />
-
-    <div class="grid grid-cols-3 gap-4 mb-6">
-      <div class="rounded-xl border border-zinc-200 px-5 py-4">
-        <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-1">Wins</p>
-        <p class="text-3xl font-bold tabular-nums leading-none">{{ scrimRecord.wins }}</p>
+  <!--
+    <section>
+      <SectionHeader title="Scrims" class="mb-5" />
+      
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="rounded-xl border border-zinc-200 px-5 py-4">
+          <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-1">Wins</p>
+          <p class="text-3xl font-bold tabular-nums leading-none">{{ scrimRecord.wins }}</p>
+        </div>
+        <div class="rounded-xl border border-zinc-200 px-5 py-4">
+          <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-1">Losses</p>
+          <p class="text-3xl font-bold tabular-nums leading-none">{{ scrimRecord.losses }}</p>
+        </div>
+        <div class="rounded-xl border border-zinc-200 px-5 py-4">
+          <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-1">Draws</p>
+          <p class="text-3xl font-bold tabular-nums leading-none">{{ scrimRecord.draws }}</p>
+        </div>
       </div>
-      <div class="rounded-xl border border-zinc-200 px-5 py-4">
-        <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-1">Losses</p>
-        <p class="text-3xl font-bold tabular-nums leading-none">{{ scrimRecord.losses }}</p>
-      </div>
-      <div class="rounded-xl border border-zinc-200 px-5 py-4">
-        <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-1">Draws</p>
-        <p class="text-3xl font-bold tabular-nums leading-none">{{ scrimRecord.draws }}</p>
-      </div>
-    </div>
-
-    <p class="text-sm font-semibold text-zinc-500 mb-3">Best Maps</p>
-    <div class="grid grid-cols-2 gap-2">
-      <div v-for="entry in scrimMaps" :key="entry.map"
+      
+      <p class="text-sm font-semibold text-zinc-500 mb-3">Best Maps</p>
+      <div class="grid grid-cols-2 gap-2">
+        <div v-for="entry in scrimMaps" :key="entry.map"
         class="flex items-center gap-3 rounded-xl border border-zinc-200 px-3 py-2.5 hover:bg-zinc-50 transition-colors">
         <img :src="mapData[entry.map].thumbnail" :alt="mapData[entry.map].displayName"
-          class="w-14 h-10 object-cover shrink-0 rounded-md" />
+        class="w-14 h-10 object-cover shrink-0 rounded-md" />
         <div class="flex-1 min-w-0">
           <p class="text-sm font-semibold truncate">{{ mapData[entry.map].displayName }}</p>
           <p class="text-xs text-zinc-400">{{ entry.wins }}W – {{ entry.played - entry.wins }}L</p>
@@ -107,4 +108,5 @@ const scrimMaps = [
       </div>
     </div>
   </section>
+  -->
 </template>
