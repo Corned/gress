@@ -33,20 +33,18 @@ const confirmDelete = (team: Team) => {
   </div>
 
   <div v-if="teams.length" class="grid grid-cols-[repeat(2,300px)] gap-5">
-    <div v-for="team in teams" :key="team.id"
-      class="rounded-xl border border-zinc-200 overflow-hidden">
+    <div v-for="team in teams" :key="team.id" class="rounded-xl border border-zinc-200 overflow-hidden">
 
       <div class="px-5 py-4 border-b border-zinc-100 flex items-center justify-between">
         <div>
           <p class="text-lg font-bold">{{ team.name }}</p>
-          <p class="text-sm text-zinc-400">{{ team.record.wins }}W · {{ team.record.losses }}L · {{ team.record.draws }}D</p>
+          <p class="text-sm text-zinc-400">{{ team.record.wins }}W · {{ team.record.losses }}L · {{ team.record.draws
+            }}D</p>
         </div>
         <div class="flex items-center gap-1.5">
           <span class="text-sm font-bold text-zinc-400 tabular-nums mr-1">{{ team.rank }}</span>
-          <UButton size="xs" variant="ghost" color="neutral" icon="i-lucide-pencil"
-            @click="openEdit(team)" />
-          <UButton size="xs" variant="ghost" color="neutral" icon="i-lucide-trash-2"
-            @click="confirmDelete(team)" />
+          <UButton size="xs" variant="ghost" color="neutral" icon="i-lucide-pencil" @click="openEdit(team)" />
+          <UButton size="xs" variant="ghost" color="neutral" icon="i-lucide-trash-2" @click="confirmDelete(team)" />
         </div>
       </div>
 
@@ -65,8 +63,7 @@ const confirmDelete = (team: Team) => {
     </div>
   </div>
 
-  <div v-else
-    class="rounded-xl border-2 border-dashed border-zinc-200 px-8 py-12 text-center">
+  <div v-else class="rounded-xl border-2 border-dashed border-zinc-200 px-8 py-12 text-center">
     <p class="text-sm font-semibold text-zinc-400">No teams yet.</p>
     <p class="text-sm text-zinc-400 mt-1">Create your first team to get started.</p>
   </div>

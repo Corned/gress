@@ -5,10 +5,7 @@ const mainNavItems = [
   { label: 'Manager', icon: 'i-lucide-shield-check', to: '/app/manage' },
 ]
 
-const teams = [
-  { label: 'MRG Garnet', slug: 'mrg-garnet', badge: 'GM5' },
-  { label: 'MRG Agate', slug: 'mrg-agate', badge: 'GM5' },
-]
+const { teams } = useTeams()
 
 const bottomNavItems = [
   [
@@ -36,10 +33,10 @@ const bottomNavItems = [
           class="flex items-center gap-2.5 px-2 py-1.5 rounded-lg hover:bg-zinc-100 transition-colors"
           active-class="bg-zinc-100">
           <div class="w-7 h-7 rounded-md bg-zinc-200 flex items-center justify-center shrink-0">
-            <span class="text-xs font-bold text-zinc-700">{{ team.label.charAt(0) }}</span>
+            <span class="text-xs font-bold text-zinc-700">{{ team.name.charAt(0) }}</span>
           </div>
-          <span class="text-sm font-semibold text-zinc-700 truncate flex-1">{{ team.label }}</span>
-          <span class="text-xs font-semibold text-zinc-400 tabular-nums">{{ team.badge }}</span>
+          <span class="text-sm font-semibold text-zinc-700 truncate flex-1">{{ team.name }}</span>
+          <span class="text-xs font-semibold text-zinc-400 tabular-nums">{{ team.rank }}</span>
         </NuxtLink>
       </div>
 

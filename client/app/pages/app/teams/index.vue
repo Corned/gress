@@ -1,34 +1,8 @@
 <script setup lang="ts">
 import { heroData } from '~/lib/heroData'
 
-const teams = [
-  {
-    name: 'MRG Garnet',
-    slug: 'mrg-garnet',
-    rank: 'GM5',
-    record: { wins: 18, losses: 5, draws: 2 },
-    roster: [
-      { name: 'Poke', hero: 'Reinhardt' as keyof typeof heroData, role: 'Tank' },
-      { name: 'Tempo', hero: 'Sojourn' as keyof typeof heroData, role: 'Damage' },
-      { name: 'Ceisses', hero: 'Tracer' as keyof typeof heroData, role: 'Damage' },
-      { name: 'Kritzkrieg', hero: 'Kiriko' as keyof typeof heroData, role: 'Support' },
-      { name: 'Ruby', hero: 'Lucio' as keyof typeof heroData, role: 'Support' },
-    ],
-  },
-  {
-    name: 'MRG Agate',
-    slug: 'mrg-agate',
-    rank: 'GM5',
-    record: { wins: 14, losses: 9, draws: 2 },
-    roster: [
-      { name: 'Skycommander', hero: 'Sigma' as keyof typeof heroData, role: 'Tank' },
-      { name: '6IQ', hero: 'Genji' as keyof typeof heroData, role: 'Damage' },
-      { name: 'TraynyanCat', hero: 'Sojourn' as keyof typeof heroData, role: 'Damage' },
-      { name: 'Valentin', hero: 'Ana' as keyof typeof heroData, role: 'Support' },
-      { name: 'LFP', hero: 'Lucio' as keyof typeof heroData, role: 'Support' },
-    ],
-  },
-]
+const { teams } = useTeams()
+
 </script>
 
 <template>

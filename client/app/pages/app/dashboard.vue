@@ -17,10 +17,7 @@ const rankedHeroes = [
   { hero: 'Sigma' as keyof typeof heroData, timePlayed: '28h', winRate: 58 },
 ]
 
-const myTeams = [
-  { name: 'MRG Garnet', slug: 'mrg-garnet', rank: 'GM5' },
-  { name: 'MRG Agate', slug: 'mrg-agate', rank: 'GM5' },
-]
+const { teams } = useTeams()
 
 const scrimRecord = { wins: 18, losses: 7, draws: 4 }
 
@@ -64,7 +61,7 @@ const scrimMaps = [
     <SectionHeader title="Your Teams" class="mb-5" />
 
     <div class="flex gap-3">
-      <ClickableCard v-for="team in myTeams" :key="team.slug" :to="`/app/teams/${team.slug}`"
+      <ClickableCard v-for="team in teams" :key="team.slug" :to="`/app/teams/${team.slug}`"
         class="flex items-center gap-3 px-4 py-3">
         <div class="w-7 h-7 rounded-md bg-zinc-200 flex items-center justify-center shrink-0">
           <span class="text-xs font-bold text-zinc-700">{{ team.name.charAt(0) }}</span>
