@@ -32,8 +32,28 @@ const seedTeams: Team[] = [
       { name: 'Ruby', hero: 'Lucio', role: 'Support' },
     ],
     staff: [
-      { name: 'Dumba', hero: "WreckingBall", role: "Coach"},
+      { name: 'Dumda', hero: "WreckingBall", role: "Coach"},
       { name: "MoodyRat", hero: "Ana", role: "Manager"},
+    ]
+  },
+  {
+    id: 'mock-team',
+    name: 'Mock Team',
+    slug: 'mock-team',
+    rank: 'Plat1',
+    record: { wins: 3, losses: 12, draws: 1 },
+    roster: [
+      { name: 'Tank 1', hero: 'Reinhardt', role: 'Tank' },
+      { name: 'Damage 1', hero: 'Hanzo', role: 'Damage' },
+      { name: 'Damage 2', hero: 'Reaper', role: 'Damage' },
+      { name: 'Damage 3', hero: 'Widowmaker', role: 'Damage' },
+      { name: 'Support 1', hero: 'Mercy', role: 'Support' },
+      { name: 'Support 2', hero: 'Zenyatta', role: 'Support' },
+      { name: 'Support 3', hero: 'Ana', role: 'Support' },
+    ],
+    staff: [
+      { name: 'Coach', hero: "WreckingBall", role: "Coach"},
+      { name: "Manager", hero: "Ana", role: "Manager"},
     ]
   },
 ]
