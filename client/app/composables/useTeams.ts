@@ -1,3 +1,4 @@
+import { defineStore } from 'pinia'
 import { heroData } from '~/lib/heroData'
 
 export interface RosterPlayer {
@@ -13,6 +14,7 @@ export interface Team {
   rank: string
   record: { wins: number; losses: number; draws: number }
   roster: RosterPlayer[]
+  staff?: RosterPlayer[]
 }
 
 const seedTeams: Team[] = [
@@ -29,25 +31,15 @@ const seedTeams: Team[] = [
       { name: 'Kritzkrieg', hero: 'Kiriko', role: 'Support' },
       { name: 'Ruby', hero: 'Lucio', role: 'Support' },
     ],
-  },
-  {
-    id: 'mrg-agate',
-    name: 'MRG Agate',
-    slug: 'mrg-agate',
-    rank: 'GM5',
-    record: { wins: 14, losses: 9, draws: 2 },
-    roster: [
-      { name: 'Skycommander', hero: 'Sigma', role: 'Tank' },
-      { name: '6IQ', hero: 'Genji', role: 'Damage' },
-      { name: 'TraynyanCat', hero: 'Sojourn', role: 'Damage' },
-      { name: 'Valentin', hero: 'Ana', role: 'Support' },
-      { name: 'LFP', hero: 'Lucio', role: 'Support' },
-    ],
+    staff: [
+      { name: 'Dumba', hero: "WreckingBall", role: "Coach"},
+      { name: "MoodyRat", hero: "Ana", role: "Manager"},
+    ]
   },
 ]
 
-export const useTeams = () => {
-  const teams = useState<Team[]>('teams', () => seedTeams)
+export const useTeams = defineStore('teams', () => {
+  const teams = ref<Team[]>(seedTeams)
 
   const getTeam = (slug: string) => teams.value.find(t => t.slug === slug)
 
@@ -73,4 +65,4 @@ export const useTeams = () => {
   }
 
   return { teams, getTeam, createTeam, updateTeam, deleteTeam }
-}
+})
