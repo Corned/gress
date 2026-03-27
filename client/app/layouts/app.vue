@@ -65,7 +65,7 @@ const bottomNavItems = [
         </UDashboardNavbar>
       </template>
 
-      <div class="p-6 pt-10 max-w-3xl">
+      <div class="p-6 pt-10 max-w-3xl overflow-y-auto h-full">
         <slot />
       </div>
     </UDashboardPanel>
