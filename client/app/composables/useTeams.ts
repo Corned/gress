@@ -7,6 +7,14 @@ export interface RosterPlayer {
   role: string
 }
 
+export interface ScheduledEvent {
+  date: string
+  timeStart: string
+  timeEnd: string
+  opponent?: string
+  type: 'match' | 'scrim' | 'coaching'
+}
+
 export interface Team {
   id: string
   name: string
@@ -14,7 +22,8 @@ export interface Team {
   rank: string
   record: { wins: number; losses: number; draws: number }
   roster: RosterPlayer[]
-  staff?: RosterPlayer[]
+  staff: RosterPlayer[]
+  schedule: ScheduledEvent[]
 }
 
 const seedTeams: Team[] = [
@@ -34,7 +43,14 @@ const seedTeams: Team[] = [
     staff: [
       { name: 'Dumda', hero: "WreckingBall", role: "Coach"},
       { name: "MoodyRat", hero: "Ana", role: "Manager"},
-    ]
+    ],
+    schedule: [
+      { date: 'Wed', timeStart: '20:00', timeEnd: '22:00', opponent: 'Seoul Infernal', type: 'scrim' },
+      { date: 'Thu', timeStart: '20:00', timeEnd: '22:00', opponent: 'MRG Agate', type: 'match' },
+      { date: 'Fri', timeStart: '20:00', timeEnd: '22:00', opponent: 'Crazy Raccoon', type: 'scrim' },
+      { date: 'Sun', timeStart: '20:00', timeEnd: '22:00', opponent: 'SF Shock', type: 'scrim' },
+      { date: 'Sun', timeStart: '22:00', timeEnd: '24:00', type: 'coaching' },
+    ],
   },
   {
     id: 'mock-team',
@@ -50,6 +66,11 @@ const seedTeams: Team[] = [
       { name: 'Support 1', hero: 'Mercy', role: 'Support' },
       { name: 'Support 2', hero: 'Zenyatta', role: 'Support' },
       { name: 'Support 3', hero: 'Ana', role: 'Support' },
+    ],
+    schedule: [
+      { date: 'Mon', timeStart: '20:00', timeEnd: '22:00', opponent: 'Seoul Infernal', type: 'scrim' },
+      { date: 'Wed', timeStart: '20:00', timeEnd: '22:00', opponent: 'Crazy Raccoon', type: 'scrim' },
+      { date: 'Fri', timeStart: '20:00', timeEnd: '22:00', opponent: 'SF Shock', type: 'scrim' },
     ],
     staff: [
       { name: 'Coach', hero: "WreckingBall", role: "Coach"},
