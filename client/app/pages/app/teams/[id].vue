@@ -7,13 +7,6 @@ const route = useRoute()
 const { getTeam } = useTeams()
 const team = computed(() => getTeam(route.params.id as string))
 
-
-const rosterByRole = computed(() => ({
-  Tank: team.value?.roster.filter(p => p.role === 'Tank') ?? [],
-  Damage: team.value?.roster.filter(p => p.role === 'Damage') ?? [],
-  Support: team.value?.roster.filter(p => p.role === 'Support') ?? [],
-}))
-
 const scrimDays = [
   { label: 'Mon', active: false },
   { label: 'Tue', active: false },
