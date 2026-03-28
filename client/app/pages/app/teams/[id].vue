@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AppleIcon, ChartColumnStackedIcon } from 'lucide-vue-next';
+import { AppleIcon, ChartColumnStackedIcon, Dumbbell } from 'lucide-vue-next';
 import MatchOverview from '~/components/MatchOverview.vue';
 import { heroData } from '~/lib/heroData';
 
@@ -7,34 +7,39 @@ const route = useRoute()
 const { getTeam } = useTeams()
 const team = computed(() => getTeam(route.params.id as string))
 
-const scrimDays = [
-  { label: 'Mon', active: false },
-  { label: 'Tue', active: false },
-  { label: 'Wed', active: true },
-  { label: 'Thu', active: false },
-  { label: 'Fri', active: true },
-  { label: 'Sat', active: false },
-  { label: 'Sun', active: true },
-]
+const { matches } = useMatches()
+
+const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+
+const blockClass = (type: 'scrim' | 'match' | 'coaching') => ({
+  scrim: 'bg-zinc-900 text-white',
+  match: 'bg-orange-600 text-white ',
+  coaching: 'bg-blue-100 text-blue-900',
+}[type])
+
 </script>
 
 <template>
   <h1 class="text-3xl font-bold mb-8">{{ team?.name }}</h1>
 
   <section class="mb-8">
-    <SectionHeader title="Scrim schedule" />
+    <SectionHeader title="Schedule" />
     <div class="grid grid-cols-7 gap-2">
-      <div v-for="day in scrimDays" :key="day.label" class="flex flex-col gap-1.5">
-        <span class="text-xs font-semibold uppercase text-center"
-          :class="day.active ? 'text-zinc-900' : 'text-zinc-300'">
-          {{ day.label }}
+      <div v-for="day in days" :key="day" class="flex flex-col gap-1.5">
+        <span class="text-xs font-semibold text-center"
+          :class="team?.schedule.find(s => s.date === day) ? 'text-zinc-900' : 'text-zinc-300'">
+          {{ day }}
         </span>
-        <div class="rounded-xl grow flex flex-col items-center justify-center py-4"
-          :class="day.active ? 'bg-zinc-900' : 'bg-zinc-100'">
-          <template v-if="day.active">
-            <span class="text-sm font-bold text-white leading-none">20:00</span>
-            <span class="text-[9px] font-semibold text-zinc-500 leading-none mt-1">CET</span>
-          </template>
+        <template v-if="team?.schedule.filter(e => e.date === day).length">
+          <div v-for="event in team.schedule.filter(e => e.date === day)" :key="event.timeStart"
+            class="rounded-xl flex flex-col p-2.5 gap-0.5" :class="blockClass(event.type)">
+            <p class="text-xs font-bold capitalize">{{ event.type }}</p>
+            <p class="text-xs opacity-60 tabular-nums">{{ event.timeStart }}–{{ event.timeEnd }}</p>
+            <p v-if="event.opponent" class="text-xs opacity-80 truncate">vs {{ event.opponent }}</p>
+          </div>
+        </template>
+        <div v-else class="rounded-xl py-3 border-2 border-dashed border-zinc-200 grid place-items-center">
+          <Dumbbell class="size-3.5 text-zinc-300" />
         </div>
       </div>
     </div>
@@ -85,12 +90,7 @@ const scrimDays = [
       </div>
 
       <div class="grid grid-cols-3 gap-2">
-        <MatchOverview />
-        <MatchOverview />
-        <MatchOverview />
-        <MatchOverview />
-        <MatchOverview />
-        <MatchOverview />
+        <MatchOverview v-for="match in matches" :key="match.id" :match="match" />
       </div>
     </div>
   </section>
