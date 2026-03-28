@@ -77,6 +77,16 @@ const seedTeams: Team[] = [
       { name: "Manager", hero: "Ana", role: "Manager"},
     ]
   },
+  {
+    id: 'empty-team',
+    name: 'Empty Team',
+    slug: 'empty-team',
+    rank: 'GM5',
+    record: { wins: 0, losses: 0, draws: 0 },
+    roster: [],
+    schedule: [],
+    staff: []
+  }
 ]
 
 export const useTeams = defineStore('teams', () => {
@@ -97,7 +107,7 @@ export const useTeams = defineStore('teams', () => {
     return slug
   }
 
-  const updateTeam = (id: string, data: Partial<Pick<Team, 'name' | 'rank' | 'roster'>>) => {
+  const updateTeam = (id: string, data: Partial<Pick<Team, 'name' | 'rank' | 'roster' | 'staff' | 'schedule'>>) => {
     teams.value = teams.value.map(t => t.id === id ? { ...t, ...data } : t)
   }
 

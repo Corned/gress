@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AppleIcon, ChartColumnStackedIcon } from 'lucide-vue-next';
+import { AppleIcon, ChartColumnStackedIcon, PencilIcon } from 'lucide-vue-next';
 import MatchOverview from '~/components/MatchOverview.vue';
 
 const route = useRoute()
@@ -10,7 +10,14 @@ const { matches } = useMatches()
 </script>
 
 <template>
-  <h1 class="text-3xl font-bold mb-8">{{ team?.name }}</h1>
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold">{{ team?.name }}</h1>
+    <NuxtLink v-if="team" :to="`/app/teams/${team.slug}/edit`"
+      class="flex items-center gap-1.5 text-sm font-semibold px-3 py-1.5 rounded-lg border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-colors">
+      <PencilIcon class="size-3.5" />
+      Edit
+    </NuxtLink>
+  </div>
 
   <section class="mb-8">
     <SectionHeader title="Schedule" />
