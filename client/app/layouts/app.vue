@@ -66,7 +66,7 @@ const bottomNavItems = [
       </template>
 
       <div class="flex flex-col p-6 pt-10 items-center overflow-y-auto h-full w-full">
-        <div class="max-w-3xl  h-full">
+        <div class="w-3xl  h-full">
           <slot />
         </div>
       </div>
