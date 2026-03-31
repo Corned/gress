@@ -8,11 +8,20 @@ export interface RosterPlayer {
 }
 
 export interface ScheduledEvent {
-  date: string
+  day: string        // 'Mon' | 'Tue' | ... | 'Sun'
   timeStart: string
   timeEnd: string
   opponent?: string
   type: 'match' | 'scrim' | 'coaching'
+}
+
+export interface ScheduleException {
+  date: string       // ISO date: 'YYYY-MM-DD'
+  timeStart: string
+  timeEnd: string
+  opponent?: string
+  type: 'match' | 'scrim' | 'coaching'
+  note?: string
 }
 
 export interface Team {
@@ -24,6 +33,7 @@ export interface Team {
   roster: RosterPlayer[]
   staff: RosterPlayer[]
   schedule: ScheduledEvent[]
+  exceptions: ScheduleException[]
 }
 
 const seedTeams: Team[] = [
@@ -45,11 +55,13 @@ const seedTeams: Team[] = [
       { name: "MoodyRat", hero: "Ana", role: "Manager"},
     ],
     schedule: [
-      { date: 'Wed', timeStart: '20:00', timeEnd: '22:00', opponent: 'Seoul Infernal', type: 'scrim' },
-      { date: 'Thu', timeStart: '20:00', timeEnd: '22:00', opponent: 'MRG Agate', type: 'match' },
-      { date: 'Fri', timeStart: '20:00', timeEnd: '22:00', opponent: 'Crazy Raccoon', type: 'scrim' },
-      { date: 'Sun', timeStart: '20:00', timeEnd: '22:00', opponent: 'SF Shock', type: 'scrim' },
-      { date: 'Sun', timeStart: '22:00', timeEnd: '24:00', type: 'coaching' },
+      { day: 'Wed', timeStart: '20:00', timeEnd: '22:00', type: 'scrim' },
+      { day: 'Fri', timeStart: '20:00', timeEnd: '22:00', type: 'scrim' },
+      { day: 'Sun', timeStart: '22:00', timeEnd: '24:00', type: 'coaching' },
+    ],
+    exceptions: [
+      { date: '2026-04-03', timeStart: '20:00', timeEnd: '22:00', opponent: 'Seoul Infernal', type: 'scrim' },
+      { date: '2026-04-10', timeStart: '20:00', timeEnd: '22:00', opponent: 'MRG Agate', type: 'match' },
     ],
   },
   {
@@ -68,10 +80,11 @@ const seedTeams: Team[] = [
       { name: 'Support 3', hero: 'Ana', role: 'Support' },
     ],
     schedule: [
-      { date: 'Mon', timeStart: '20:00', timeEnd: '22:00', opponent: 'Seoul Infernal', type: 'scrim' },
-      { date: 'Wed', timeStart: '20:00', timeEnd: '22:00', opponent: 'Crazy Raccoon', type: 'scrim' },
-      { date: 'Fri', timeStart: '20:00', timeEnd: '22:00', opponent: 'SF Shock', type: 'scrim' },
+      { day: 'Mon', timeStart: '20:00', timeEnd: '22:00', type: 'scrim' },
+      { day: 'Wed', timeStart: '20:00', timeEnd: '22:00', type: 'scrim' },
+      { day: 'Fri', timeStart: '20:00', timeEnd: '22:00', type: 'scrim' },
     ],
+    exceptions: [],
     staff: [
       { name: 'Coach', hero: "WreckingBall", role: "Coach"},
       { name: "Manager", hero: "Ana", role: "Manager"},
@@ -85,6 +98,7 @@ const seedTeams: Team[] = [
     record: { wins: 0, losses: 0, draws: 0 },
     roster: [],
     schedule: [],
+    exceptions: [],
     staff: []
   }
 ]
@@ -103,11 +117,14 @@ export const useTeams = defineStore('teams', () => {
       rank: data.rank,
       record: { wins: 0, losses: 0, draws: 0 },
       roster: data.roster ?? [],
+      staff: [],
+      schedule: [],
+      exceptions: [],
     }]
     return slug
   }
 
-  const updateTeam = (id: string, data: Partial<Pick<Team, 'name' | 'rank' | 'roster' | 'staff' | 'schedule'>>) => {
+  const updateTeam = (id: string, data: Partial<Pick<Team, 'name' | 'rank' | 'roster' | 'staff' | 'schedule' | 'exceptions'>>) => {
     teams.value = teams.value.map(t => t.id === id ? { ...t, ...data } : t)
   }
 

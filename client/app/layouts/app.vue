@@ -2,14 +2,16 @@
 const mainNavItems = [
   { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', to: '/app/dashboard' },
   { label: 'My Teams', icon: 'i-lucide-users-round', to: '/app/teams' },
-  { label: 'Manager', icon: 'i-lucide-shield-check', to: '/app/manage' },
+]
+
+const manageNavItems = [
+  { label: 'Teams', icon: 'i-lucide-shield-check', to: '/app/manage/teams' },
 ]
 
 const { teams } = useTeams()
 
 const bottomNavItems = [
   [
-    { label: 'Profile', icon: 'i-lucide-user', to: '/app/profile' },
     { label: 'Settings', icon: 'i-lucide-settings', to: '/app/settings' },
   ],
 ]
@@ -26,6 +28,12 @@ const bottomNavItems = [
 
       <UNavigationMenu orientation="vertical" variant="pill" color="neutral" :items="[mainNavItems]"
         :ui="{ linkLabel: 'font-semibold', childLinkLabel: 'font-semibold' }" />
+
+      <div class="flex flex-col gap-0.5">
+        <p class="px-2 text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1">Manage</p>
+        <UNavigationMenu orientation="vertical" variant="pill" color="neutral" :items="[manageNavItems]"
+          :ui="{ linkLabel: 'font-semibold', childLinkLabel: 'font-semibold' }" />
+      </div>
 
       <div class="flex flex-col gap-0.5">
         <p class="px-2 text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1">Teams</p>
