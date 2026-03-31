@@ -14,9 +14,9 @@ const emit = defineEmits<{
 }>()
 
 const blockClass = () => ({
-  scrim: 'bg-zinc-100 text-zinc-700',
-  match: 'bg-zinc-900 text-white',
-  coaching: 'bg-zinc-200 text-zinc-600',
+  scrim: 'bg-orange-500 text-white',
+  match: 'bg-zinc-200 text-zinc-600',
+  coaching: 'bg-red-500 text-white',
 }[props.event.type])
 
 const editEvent = () => {

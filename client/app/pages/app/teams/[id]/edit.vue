@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { heroData } from '~/lib/heroData'
-import type { RosterPlayer, ScheduledEvent, ScheduleException } from '~/composables/useTeams'
+import type { RosterPlayer, ScheduledEvent } from '~/composables/useTeams'
 
 const route = useRoute()
 const router = useRouter()
@@ -12,7 +12,6 @@ const rank = ref('')
 const roster = ref<RosterPlayer[]>([])
 const staff = ref<RosterPlayer[]>([])
 const schedule = ref<ScheduledEvent[]>([])
-const exceptions = ref<ScheduleException[]>([])
 
 watch(team, (t) => {
   if (!t) return
@@ -21,7 +20,6 @@ watch(team, (t) => {
   roster.value = t.roster.map(p => ({ ...p }))
   staff.value = t.staff.map(p => ({ ...p }))
   schedule.value = t.schedule.map(e => ({ ...e }))
-  exceptions.value = t.exceptions.map(e => ({ ...e }))
 }, { immediate: true })
 
 const heroOptions = Object.keys(heroData).sort().map(key => ({
@@ -61,50 +59,35 @@ const eventTypes = [
   { label: 'Coaching', value: 'coaching' },
 ]
 
-const newEventDay = ref('Mon')
+const expandedDay = ref<string | null>(null)
 const newEventType = ref<'scrim' | 'match' | 'coaching'>('scrim')
 const newEventTimeStart = ref('20:00')
 const newEventTimeEnd = ref('22:00')
-const newEventOpponent = ref('')
 
-const addEvent = () => {
+const openDayForm = (day: string) => {
+  expandedDay.value = day
+  newEventType.value = 'scrim'
+  newEventTimeStart.value = '20:00'
+  newEventTimeEnd.value = '22:00'
+}
+
+const addEventToDay = (day: string) => {
   if (!newEventTimeStart.value || !newEventTimeEnd.value) return
   schedule.value.push({
-    day: newEventDay.value,
+    day,
     type: newEventType.value,
     timeStart: newEventTimeStart.value,
     timeEnd: newEventTimeEnd.value,
-    ...(newEventOpponent.value.trim() ? { opponent: newEventOpponent.value.trim() } : {}),
   })
-  newEventTimeStart.value = '20:00'
-  newEventTimeEnd.value = '22:00'
-  newEventOpponent.value = ''
+  expandedDay.value = null
 }
 
-// Exceptions
-const newExDate = ref('')
-const newExType = ref<'scrim' | 'match' | 'coaching'>('scrim')
-const newExTimeStart = ref('')
-const newExTimeEnd = ref('')
-const newExOpponent = ref('')
-const newExNote = ref('')
-
-const addException = () => {
-  if (!newExDate.value || !newExTimeStart.value || !newExTimeEnd.value) return
-  exceptions.value.push({
-    date: newExDate.value,
-    type: newExType.value,
-    timeStart: newExTimeStart.value,
-    timeEnd: newExTimeEnd.value,
-    ...(newExOpponent.value.trim() ? { opponent: newExOpponent.value.trim() } : {}),
-    ...(newExNote.value.trim() ? { note: newExNote.value.trim() } : {}),
-  })
-  newExDate.value = ''
-  newExTimeStart.value = ''
-  newExTimeEnd.value = ''
-  newExOpponent.value = ''
-  newExNote.value = ''
+const removeEvent = (day: string, index: number) => {
+  const dayEvents = schedule.value.filter(e => e.day === day)
+  const target = dayEvents[index]
+  schedule.value = schedule.value.filter(e => e !== target)
 }
+
 
 const save = () => {
   if (!team.value) return
@@ -114,7 +97,6 @@ const save = () => {
     roster: roster.value,
     staff: staff.value,
     schedule: schedule.value,
-    exceptions: exceptions.value,
   })
   router.back()
 }
@@ -137,7 +119,7 @@ const typeVariant = (type: 'scrim' | 'match' | 'coaching') => ({
     <!-- Header -->
     <div class="flex items-center justify-between mb-8">
       <div class="flex items-center gap-3">
-        <button class="p-1.5 rounded-lg border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-colors"
+        <button class="p-1.5 rounded-lg border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-colors cursor-pointer"
           @click="router.back()">
           <UIcon name="i-lucide-arrow-left" class="size-4 text-zinc-500" />
         </button>
@@ -173,47 +155,50 @@ const typeVariant = (type: 'scrim' | 'match' | 'coaching') => ({
       </div>
 
       <!-- Weekly recurring -->
-      <div class="px-5 py-4 border-b border-zinc-100">
-        <p class="text-xs font-medium text-zinc-400 mb-3">Weekly</p>
-        <Schedule v-if="schedule.length" :schedule="schedule" class="mb-4" editable />
-        <p v-else class="text-sm text-zinc-400 mb-4">No recurring events.</p>
-        <div class="flex gap-2">
-          <USelect v-model="newEventDay" :items="days" class="w-24" />
-          <USelect v-model="newEventType" :items="eventTypes" class="w-32" />
-          <UInput v-model="newEventTimeStart" type="time" step="300" class="w-32" />
-          <UInput v-model="newEventTimeEnd" type="time" step="300" class="w-32" />
-          <UButton variant="outline" color="neutral" icon="i-lucide-plus" @click="addEvent" />
-        </div>
-      </div>
+      <div class="px-5 py-4">
+        <div class="grid grid-cols-7 gap-1.5">
+          <div v-for="day in days" :key="day" class="flex flex-col gap-1">
+            <!-- Day label -->
+            <p class="text-[11px] font-semibold text-center mb-0.5"
+              :class="schedule.some(e => e.day === day) ? 'text-zinc-700' : 'text-zinc-300'">
+              {{ day }}
+            </p>
 
-      <!-- Exceptions -->
-      <div class="px-5 py-3 border-b border-zinc-100">
-        <p class="text-xs font-medium text-zinc-400 mb-2">Exceptions</p>
-        <div class="divide-y divide-zinc-100">
-          <div v-if="!exceptions.length" class="py-2 text-sm text-zinc-400">No exceptions.</div>
-          <div v-for="(ex, i) in exceptions" :key="i" class="flex items-center gap-3 py-2.5">
-            <span class="text-xs font-bold text-zinc-500 shrink-0 tabular-nums">{{ ex.date }}</span>
-            <UBadge :label="ex.type" color="neutral" :variant="typeVariant(ex.type)" size="sm"
-              class="capitalize shrink-0" />
-            <span class="text-xs tabular-nums text-zinc-500 shrink-0">{{ ex.timeStart }}–{{ ex.timeEnd }}</span>
-            <span v-if="ex.opponent" class="text-xs text-zinc-400 truncate">vs {{ ex.opponent }}</span>
-            <span v-if="ex.note" class="text-xs text-zinc-400 italic truncate flex-1">{{ ex.note }}</span>
-            <span v-else class="flex-1" />
-            <button class="text-zinc-300 hover:text-zinc-500 transition-colors" @click="exceptions.splice(i, 1)">
-              <UIcon name="i-lucide-x" class="size-3.5" />
+            <!-- Existing events -->
+            <div
+              v-for="(event, idx) in schedule.filter(e => e.day === day).sort((a, b) => a.timeStart.localeCompare(b.timeStart))"
+              :key="idx"
+              :class="['relative rounded-lg p-1.5 text-center group select-none', event.type === 'match' ? 'bg-zinc-200 text-zinc-600' : event.type === 'scrim' ? 'bg-orange-500 text-white' : 'bg-red-500 text-white']">
+              <p class="text-[10px] font-bold capitalize leading-tight">{{ event.type }}</p>
+              <p class="text-[10px] opacity-60 tabular-nums leading-tight">{{ event.timeStart }}–{{ event.timeEnd }}</p>
+              <button
+                class="absolute -top-1 -right-1 size-4 rounded-full bg-zinc-500 text-white opacity-0 group-hover:opacity-100 transition-opacity grid place-items-center cursor-pointer"
+                @click="removeEvent(day, idx)">
+                <UIcon name="i-lucide-x" class="size-2.5" />
+              </button>
+            </div>
+
+            <!-- Inline add form -->
+            <div v-if="expandedDay === day" class="flex flex-col gap-1">
+              <USelect v-model="newEventType" :items="eventTypes" size="xs" />
+              <UInput v-model="newEventTimeStart" type="time" step="300" size="xs" />
+              <UInput v-model="newEventTimeEnd" type="time" step="300" size="xs" />
+              <div class="flex gap-1">
+                <UButton size="xs" color="neutral" class="flex-1" @click="addEventToDay(day)">Add</UButton>
+                <UButton size="xs" color="neutral" variant="ghost" icon="i-lucide-x" @click="expandedDay = null" />
+              </div>
+            </div>
+
+            <!-- Add button -->
+            <button v-else
+              class="rounded-lg py-2.5 border border-dashed border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-colors grid place-items-center cursor-pointer"
+              @click="openDayForm(day)">
+              <UIcon name="i-lucide-plus" class="size-3 text-zinc-300" />
             </button>
           </div>
         </div>
       </div>
-      <div class="px-5 py-3 bg-zinc-50 flex gap-2 flex-wrap">
-        <UInput v-model="newExDate" placeholder="YYYY-MM-DD" class="w-36" />
-        <USelect v-model="newExType" :items="eventTypes" class="w-32" />
-        <UInput v-model="newExTimeStart" placeholder="20:00" class="w-24" />
-        <UInput v-model="newExTimeEnd" placeholder="22:00" class="w-24" />
-        <UInput v-model="newExOpponent" placeholder="Opponent" class="flex-1 min-w-28" />
-        <UInput v-model="newExNote" placeholder="Note (optional)" class="flex-1 min-w-28" />
-        <UButton variant="outline" color="neutral" icon="i-lucide-plus" @click="addException" />
-      </div>
+
     </div>
 
     <!-- Roster + Staff -->
@@ -230,7 +215,8 @@ const typeVariant = (type: 'scrim' | 'match' | 'coaching') => ({
               class="w-8 h-8 rounded-full object-cover bg-zinc-200 shrink-0" />
             <span class="text-sm font-semibold flex-1">{{ player.name }}</span>
             <UBadge :label="player.role" color="neutral" :variant="roleVariant(player.role)" size="sm" />
-            <button class="text-zinc-300 hover:text-zinc-500 transition-colors ml-1" @click="roster.splice(i, 1)">
+            <button class="text-zinc-300 hover:text-zinc-500 transition-colors ml-1 cursor-pointer"
+              @click="roster.splice(i, 1)">
               <UIcon name="i-lucide-x" class="size-3.5" />
             </button>
           </div>
@@ -254,7 +240,8 @@ const typeVariant = (type: 'scrim' | 'match' | 'coaching') => ({
               class="w-8 h-8 rounded-full object-cover bg-zinc-200 shrink-0" />
             <span class="text-sm font-semibold flex-1">{{ member.name }}</span>
             <span class="text-xs text-zinc-400">{{ member.role }}</span>
-            <button class="text-zinc-300 hover:text-zinc-500 transition-colors ml-1" @click="staff.splice(i, 1)">
+            <button class="text-zinc-300 hover:text-zinc-500 transition-colors ml-1 cursor-pointer"
+              @click="staff.splice(i, 1)">
               <UIcon name="i-lucide-x" class="size-3.5" />
             </button>
           </div>

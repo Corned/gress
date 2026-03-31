@@ -23,7 +23,7 @@ const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         {{ day }}
       </span>
       <template v-if="schedule.filter(e => e.day === day).length">
-        <ScheduleBlock v-for="event in schedule.filter(e => e.day === day)" :key="event.timeStart" :event="event"
+        <ScheduleBlock v-for="event in schedule.filter(e => e.day === day).sort((a, b) => a.timeStart.localeCompare(b.timeStart))" :key="event.timeStart" :event="event"
           :editable="editable" />
       </template>
       <div v-else class="rounded-xl py-3 border-2 border-dashed border-zinc-200 grid place-items-center">
