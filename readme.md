@@ -17,3 +17,7 @@ MONGODB_URI=...
 ```
 ./deploy.sh
 ```
+
+## Database Schema
+
+See [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md).
