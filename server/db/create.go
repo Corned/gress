@@ -14,8 +14,8 @@ import (
 func Create(client *mongo.Client) {
 	fmt.Println("Creating entry...")
 
-	// "gress" is the database name, "entries" is the collection name
-	collection := client.Database("gress").Collection("scrimBlocks")
+	// "openbench" is the database name, "scrimBlocks" is the collection name
+	collection := client.Database("openbench").Collection("scrimBlocks")
 
 	newEntry := ScrimBlock{
 		Team1: "Team 1",

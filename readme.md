@@ -1,8 +1,6 @@
-# gress
+# openBench
 
-Gress is an application built to track Overwatch 2 scrimmage results.
-
-[gress.tmp.ooo](https://gress.tmp.ooo)
+openBench is an open-source team management tool for Overwatch 2.
 
 ## Setup and Running
 

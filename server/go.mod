@@ -1,4 +1,4 @@
-module gress-server
+module openbench-server
 
 go 1.25.0
 

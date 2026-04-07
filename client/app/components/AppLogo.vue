@@ -10,7 +10,7 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div class="flex items-baseline select-none">
-    <span :class="[size, 'font-bold text-zinc-300']">pro</span>
-    <span :class="[size, 'font-bold text-zinc-950']">gress</span>
+    <span :class="[size, 'font-bold text-zinc-300']">open</span>
+    <span :class="[size, 'font-bold text-zinc-950']">Bench</span>
   </div>
 </template>

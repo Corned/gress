@@ -1,7 +1,7 @@
 services:
   # Monolithic Go Service (Native Environment)
   - type: web
-    name: gress-monolith
+    name: openbench-monolith
     env: go
     rootDir: .
     buildCommand: chmod +x deploy.sh && ./deploy.sh

@@ -10,13 +10,13 @@ import { BarChart2, Users, Trophy, Swords, Map, TrendingUp, Shield } from 'lucid
       <AppLogo size="text-[6rem]" />
 
       <p class="text-xl text-zinc-500 leading-relaxed font-medium">
-        The scrim tracker built for Overwatch 2.
+        The team management tool for Overwatch 2.
       </p>
 
       <!-- Feature pills -->
       <div class="flex items-center gap-2 flex-wrap justify-center">
-        <FeaturePill label="Match history" :icon="BarChart2" />
-        <FeaturePill label="Team scrims" :icon="Users" />
+        <FeaturePill label="Roster management" :icon="Users" />
+        <FeaturePill label="Scrim scheduling" :icon="BarChart2" />
         <FeaturePill label="Rank tracking" :icon="Trophy" />
         <FeaturePill label="Map stats" :icon="Map" />
       </div>

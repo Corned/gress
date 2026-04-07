@@ -1,7 +1,7 @@
 package router
 
 import (
-	"gress-server/handlers"
+	"openbench-server/handlers"
 
 	"github.com/gin-gonic/gin"
 )

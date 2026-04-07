@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"gress-server/router"
+	"openbench-server/router"
 
 	"github.com/joho/godotenv"
 )

@@ -19,7 +19,7 @@ Client uses **bun** as the package manager. Server uses Go 1.25.
 
 ## Architecture
 
-**gress** is an Overwatch 2 scrim tracker — a Nuxt 4 SPA served by a Go/Gin backend as static files.
+**openBench** is an Overwatch 2 team management tool — a Nuxt 4 SPA served by a Go/Gin backend as static files.
 
 ```
 client/   → Nuxt 4 + Vue 3 + TypeScript + Tailwind CSS 4 + Nuxt UI 4
