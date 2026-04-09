@@ -40,7 +40,7 @@ The build pipeline (`make build-client`) runs `bun run generate` to produce a st
 
 ### Design system
 
-- **Colors:** Zinc only — no other Tailwind color palette
+- **Colors:** Zinc as primary palette. `orange-500` allowed sparingly for highlights and active/emphasis states (e.g. today indicator, event badges)
 - **Typography:** Google Sans for UI, Rubik for display/headings
 - **Hover states:** No shadows — use background/border color changes instead
 - **Navigation:** Prefer `NuxtLink` over `useRouter().push()`
