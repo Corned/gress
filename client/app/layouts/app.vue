@@ -73,8 +73,8 @@ const bottomNavItems = [
         </UDashboardNavbar>
       </template>
 
-      <div class="flex flex-col p-6 pt-10 items-center overflow-y-auto h-full w-full">
-        <div class="w-3xl  h-full">
+      <div class="flex flex-col p-6 pt-8 overflow-y-auto h-full w-full">
+        <div class="w-4xl h-full">
           <slot />
         </div>
       </div>
