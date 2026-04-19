@@ -1,35 +1,34 @@
 <script setup lang="ts">
-import { heroData } from '~/lib/heroData'
-import { mapData } from '~/lib/mapData'
-
 const username = 'Tempo'
 
 const { teams } = useTeams()
 
+const scrimsThisWeek = computed(() =>
+  teams.flatMap(t => t.schedule).filter(e => e.type === 'scrim').length
+)
+
+const combinedRecord = computed(() =>
+  teams.reduce((acc, t) => ({
+    wins: acc.wins + t.record.wins,
+    losses: acc.losses + t.record.losses,
+  }), { wins: 0, losses: 0 })
+)
 </script>
 
 <template>
   <div class="mb-10">
-    <h1 class="text-3xl font-bold">Hello, {{ username }}!</h1>
+    <h1 class="text-3xl font-bold mb-4">Hello, {{ username }}!</h1>
+    <div class="flex gap-2">
+      <span class="text-xs font-semibold px-3 py-1.5 rounded-full bg-zinc-100 text-zinc-500">
+        {{ teams.length }} team{{ teams.length !== 1 ? 's' : '' }}
+      </span>
+      <span class="text-xs font-semibold px-3 py-1.5 rounded-full bg-zinc-100 text-zinc-500">
+        {{ scrimsThisWeek }} scrim{{ scrimsThisWeek !== 1 ? 's' : '' }} this week
+      </span>
+      <span class="text-xs font-semibold px-3 py-1.5 rounded-full bg-zinc-100 text-zinc-500">
+        {{ combinedRecord.wins }}W {{ combinedRecord.losses }}L
+      </span>
+    </div>
   </div>
 
-  <section class="mb-10">
-    <SectionHeader title="Here is your weekly calendar" class="mb-5" />
-    <Calendar :teams="teams" />
-  </section>
-
-  <section class="mb-10">
-    <SectionHeader title="Your Teams" class="mb-5" />
-
-    <div class="flex gap-3">
-      <ClickableCard v-for="team in teams" :key="team.slug" :to="`/app/teams/${team.slug}`"
-        class="flex items-center gap-3 px-4 py-3">
-        <div class="w-7 h-7 rounded-md bg-zinc-200 flex items-center justify-center shrink-0">
-          <span class="text-xs font-bold text-zinc-700">{{ team.name.charAt(0) }}</span>
-        </div>
-        <span class="text-sm font-semibold">{{ team.name }}</span>
-        <span class="text-xs font-semibold text-zinc-400 tabular-nums">{{ team.rank }}</span>
-      </ClickableCard>
-    </div>
-  </section>
 </template>

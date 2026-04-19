@@ -21,7 +21,7 @@ const { matches } = useMatches()
 
   <section class="mb-8">
     <SectionHeader title="Schedule" />
-    <Schedule v-if="team" :schedule="team.schedule" />
+    <Schedule v-if="team" :teams="[team]" />
   </section>
 
 

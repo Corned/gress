@@ -15,6 +15,10 @@
   font-family: "GoogleSans", "Inter";
 }
 
+button:not(:disabled) {
+  cursor: pointer;
+}
+
 .transparent {
   background-image: conic-gradient(
     #8f8f8f 90deg,
